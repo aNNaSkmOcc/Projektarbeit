@@ -228,12 +228,14 @@ public class FirmaGUI extends JFrame {
 
     private void mitarbetierZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbetierZuBauauftragActionPerformed
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterKriegtJob(jTable1, jTable2);
+            arbeiterKriegtJob(jTable1, jTable2,Arbeiter.mitArbeiterListe.get(jTable1.getSelectedRow()));
 
         }
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
-
+        }
+        if (Arbeiter.mitArbeiterListe.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Wir haben keine Arbeiter");
         }
 
 
@@ -247,7 +249,7 @@ public class FirmaGUI extends JFrame {
             arbeiterWirdArbeitslos(jTable1, jTable2);
         }
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
-    
+
     private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAufträgeHinzufügenButtonActionPerformed
         int bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
         String auftragGeber = JOptionPane.showInputDialog(null, "Aufftraggeber?");
@@ -483,21 +485,20 @@ public class FirmaGUI extends JFrame {
     }
 
     //----------------------------------------
-    public void arbeiterKriegtJob(JTable table1, JTable table2) {
+    public void arbeiterKriegtJob(JTable table1, JTable table2,Arbeiter a1) {
 
-        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
 
-         
-            Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()));
-            JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich zugewiesen");
-            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
-        } else {
+        for (int b = 0; b < Arbeiter.mitArbeiterListe.size(); b++) {
+            if (Arbeiter.mitArbeiterListe.get(b).getHatAuftrag() == false) {
 
-            JOptionPane.showMessageDialog(null, "Der Mitarbeiter hat bereits einen Job");
+                Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
+                JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
+                Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
+            }
         }
     }
 
-    public void arbeiterWirdArbeitslos(JTable table1, JTable table2) {
+public void arbeiterWirdArbeitslos(JTable table1, JTable table2) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             System.out.println("Wir haben keine Bauaufträge");
             return;

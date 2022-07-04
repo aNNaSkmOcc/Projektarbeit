@@ -37,15 +37,34 @@ public class Bauauftrag extends Arbeiter {
 
 
     public static void AuftragListeAusgeben() {
-            for(int k = 0; k < Bauauftrag.bauAuftragListe.size();k++){
-                System.out.println(Bauauftrag.bauAuftragListe.get(k).getBauauftragsID());
-                System.out.println(Bauauftrag.bauAuftragListe.get(k).getAuftragGeber());
-                
-                for(int i = 0; i < bauAuftragMitArbeiter.size();i++){
-                   System.out.println(i); 
+        if (bauAuftragListe.isEmpty()) {
+            System.out.println("Die Liste ist Leer du spasti :D");
+        }
+        for (int j = 0; j < bauAuftragListe.size(); j++) {
+            System.out.println("--------------------------");
+            Collections.sort(bauAuftragListe, new Comparator<Bauauftrag>() {
+                @Override
+                public int compare(Bauauftrag o1, Bauauftrag o2) {
+                    return Integer.valueOf(o1.bauauftragsID).compareTo(o2.bauauftragsID);
                 }
-                    
-    }
+            });
+            System.out.println("AuftragsId: " + bauAuftragListe.get(j).getBauauftragsID());
+            System.out.println("Auftragsgeber: " + bauAuftragListe.get(j).getAuftragGeber());
+            System.out.println("adresse: " + bauAuftragListe.get(j).getadresse());
+            System.out.println("ort: " + bauAuftragListe.get(j).getOrt());
+            System.out.println("Beschreibung: " + bauAuftragListe.get(j).getBeschreibung());
+            System.out.println("AnfangsDatum: " + bauAuftragListe.get(j).getStartDatum());
+            System.out.println("Enddatum: " + bauAuftragListe.get(j).getEndDatum());
+            System.out.println("Zugewiesene FirmaGUI.Arbeiter: ");
+            if (bauAuftragListe.get(j).getBauAuftragMitArbeiter().isEmpty()) {
+                System.out.println("keine :D ");
+            } else {
+                for (int k = 0; k < bauAuftragMitArbeiter.size(); k++) {
+                    System.out.println("* "+bauAuftragListe.get(j).getBauAuftragMitArbeiter().get(k).getName());
+                }
+            }
+            System.out.println("--------------------------");
+        }
     }
 
 

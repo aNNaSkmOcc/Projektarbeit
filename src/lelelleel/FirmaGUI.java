@@ -13,8 +13,15 @@ public class FirmaGUI extends JFrame {
     /**
      * Creates new form FirmaGUI
      */
-    public FirmaGUI() {
+    public FirmaGUI(String titel) {
+        super(titel);
         initComponents();
+        this.setContentPane(mainFrame);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //sorgt dafür, dass sich dass Programm stoppt, sobald das Fenster schließt                                            //passt das Fenster den Knöpfen an
+        this.setVisible(true);                                  //sorgt dafür, dass wir das Fenster überhaupt sehenn
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +41,10 @@ public class FirmaGUI extends JFrame {
         bauAufträgeHinzufügenButton = new javax.swing.JButton();
         bauauftragÄndernButton = new javax.swing.JButton();
         bauAuftragEntfernenButton = new javax.swing.JButton();
+        zugewieseseneArbeiterAnzeigenButton = new javax.swing.JButton();
 
+        setTitle("Baufirmaa");
+        setLocation(new java.awt.Point(0, 0));
         setName("mainFrame"); // NOI18N
 
         mitarbeiterHinzufügenButton.setText("Arbeiter hinzufügen");
@@ -114,6 +124,13 @@ public class FirmaGUI extends JFrame {
             }
         });
 
+        zugewieseseneArbeiterAnzeigenButton.setText("zugewiesene Arbeiter anzeigen");
+        zugewieseseneArbeiterAnzeigenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zugewieseseneArbeiterAnzeigenButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainFrameLayout = new javax.swing.GroupLayout(mainFrame);
         mainFrame.setLayout(mainFrameLayout);
         mainFrameLayout.setHorizontalGroup(
@@ -122,49 +139,58 @@ public class FirmaGUI extends JFrame {
                 .addContainerGap()
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(mitarbetierZuBauauftrag)
                             .addComponent(arbeiterVonBauauftragLöschenButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(mitarbeiterHinzufügenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterÄndernButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mitarbeiterEntfernenButton)
-                        .addGap(99, 99, 99)))
+                        .addGap(102, 102, 102)))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
+                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainFrameLayout.createSequentialGroup()
+                                .addComponent(zugewieseseneArbeiterAnzeigenButton)
+                                .addGap(46, 46, 46)
+                                .addComponent(bauAuftragEntfernenButton))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(bauAufträgeHinzufügenButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bauauftragÄndernButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bauAuftragEntfernenButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(bauauftragÄndernButton)
+                        .addGap(72, 72, 72))))
         );
         mainFrameLayout.setVerticalGroup(
             mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mitarbeiterHinzufügenButton)
-                    .addComponent(mitarbeiterEntfernenButton)
-                    .addComponent(arbeiterÄndernButton)
-                    .addComponent(bauAufträgeHinzufügenButton)
-                    .addComponent(bauauftragÄndernButton)
-                    .addComponent(bauAuftragEntfernenButton))
+                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(mitarbeiterHinzufügenButton)
+                        .addComponent(mitarbeiterEntfernenButton)
+                        .addComponent(arbeiterÄndernButton)
+                        .addComponent(bauAufträgeHinzufügenButton))
+                    .addComponent(bauauftragÄndernButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(mitarbetierZuBauauftrag)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterVonBauauftragLöschenButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(zugewieseseneArbeiterAnzeigenButton)
+                            .addComponent(bauAuftragEntfernenButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane1))))
@@ -177,15 +203,13 @@ public class FirmaGUI extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,6 +304,10 @@ public class FirmaGUI extends JFrame {
         bauAuftragTabelleAbändern(jTable2);
     }//GEN-LAST:event_bauauftragÄndernButtonActionPerformed
 
+    private void zugewieseseneArbeiterAnzeigenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
+      new zugewieseneMitArbeiter("zugewiesene Arbetier",jTable2).setVisible(true);
+    }//GEN-LAST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
@@ -295,15 +323,11 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JButton mitarbeiterEntfernenButton;
     private javax.swing.JButton mitarbeiterHinzufügenButton;
     private javax.swing.JButton mitarbetierZuBauauftrag;
+    private javax.swing.JButton zugewieseseneArbeiterAnzeigenButton;
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-        JFrame firmaGUI = new JFrame("Baufirmaa");                  //Erstellt das GUIFenster mit dem Titel Baufirma
-        firmaGUI.setContentPane(new FirmaGUI().mainFrame);          //Packt unser Hauptfenster in die GUI
-        firmaGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //sorgt dafür, dass sich dass Programm stoppt, sobald das Fenster schließt
-        firmaGUI.pack();                                            //passt das Fenster den Knöpfen an
-        firmaGUI.setVisible(true);                                  //sorgt dafür, dass wir das Fenster überhaupt sehenn
-        firmaGUI.setSize(1000, 500);                                 //Die länge und Breite des Fensters
+        FirmaGUI gui = new FirmaGUI("Baufirmaa");
 
         //sonstige Attribute
         {
@@ -315,29 +339,16 @@ public class FirmaGUI extends JFrame {
             while (i < 1) {
                 int entscheidung = scanner.nextInt();
                 switch (entscheidung) {
-                    //Methoden für den FirmaGUI.Arbeiter
-
-                    //-------------------------------------
-                    case 0: {
-                        System.out.println("--------------------------");
-                        System.out.println("Auf Wiedersehen!");
-                        System.out.println("--------------------------");
-                        System.out.println("--------------------------");
-                        i = 1;
-                        break;
-                    }                   //Programm beenden
-
-                    //Methoden für die Bauaufträge
-                    //-------------------------------------
-                    case 6: {
+                    case 1: {
                         Bauauftrag.AuftragListeAusgeben();
                         break;
-                    }                   //Bauaufträge entfernen                  //Bauaufträge bearbeiten                //Bauaufträge ausgeben
-                    case 10: {
-                        Bauauftrag.arbeiterVonAuftragEntfernen();
-                    }                  //FirmaGUI.Arbeiter von einem Bauauftrag entfernen
-                    //-------------------------------------
-
+                    }                   //Bauaufträge entfernen                  //Bauaufträge bearbeiten
+                    
+                    case 2: 
+                    {
+                     Arbeiter.arbeiterListeAusgeben();
+                    }
+                    
                 }
                 if (entscheidung > 10) {
                     System.out.println("--------------------------");

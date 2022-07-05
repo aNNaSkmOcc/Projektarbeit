@@ -13,14 +13,12 @@ public class FirmaGUI extends JFrame {
     /**
      * Creates new form FirmaGUI
      */
-    public FirmaGUI(String titel) {
-        super(titel);
+    public FirmaGUI() {
         initComponents();
         this.setContentPane(mainFrame);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //sorgt dafür, dass sich dass Programm stoppt, sobald das Fenster schließt                                            //passt das Fenster den Knöpfen an
         this.setVisible(true);                                  //sorgt dafür, dass wir das Fenster überhaupt sehenn
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
         this.pack();
     }
 
@@ -31,10 +29,10 @@ public class FirmaGUI extends JFrame {
         mainFrame = new javax.swing.JPanel();
         mitarbeiterHinzufügenButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMitarbeiter = new javax.swing.JTable();
         mitarbeiterEntfernenButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableBauaufträge = new javax.swing.JTable();
         arbeiterÄndernButton = new javax.swing.JButton();
         mitarbetierZuBauauftrag = new javax.swing.JButton();
         arbeiterVonBauauftragLöschenButton = new javax.swing.JButton();
@@ -43,9 +41,11 @@ public class FirmaGUI extends JFrame {
         bauAuftragEntfernenButton = new javax.swing.JButton();
         zugewieseseneArbeiterAnzeigenButton = new javax.swing.JButton();
 
-        setTitle("Baufirmaa");
+        setTitle("A&C - GmbH & Co.KG");
         setLocation(new java.awt.Point(0, 0));
         setName("mainFrame"); // NOI18N
+
+        mainFrame.setName(""); // NOI18N
 
         mitarbeiterHinzufügenButton.setText("Arbeiter hinzufügen");
         mitarbeiterHinzufügenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -54,8 +54,8 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMitarbeiter.setAutoCreateRowSorter(true);
+        tableMitarbeiter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -63,7 +63,7 @@ public class FirmaGUI extends JFrame {
                 "ID", "Name", "Beruf", "Jahresgehalt", "Einstellungsdatum"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMitarbeiter);
 
         mitarbeiterEntfernenButton.setText("Arbeiter entfernen");
         mitarbeiterEntfernenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +72,7 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableBauaufträge.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -80,7 +80,7 @@ public class FirmaGUI extends JFrame {
                 "ID", "Auftraggeber", "Adresse", "Ort", "Tätigkeit", "Anfangsdatum", "Enddatum"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableBauaufträge);
 
         arbeiterÄndernButton.setText("Arbeiter ändern");
         arbeiterÄndernButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public class FirmaGUI extends JFrame {
         if (Arbeiter.mitArbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
         } else {
-            ArbeiterVonTabelleEntfernen(jTable1);
+            ArbeiterVonTabelleEntfernen(tableMitarbeiter);
         }
     }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
 
@@ -247,12 +247,12 @@ public class FirmaGUI extends JFrame {
         if (Arbeiter.mitArbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
         }
-        ArbeiterTabelleAbÄndern(jTable1);
+        ArbeiterTabelleAbÄndern(tableMitarbeiter);
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
 
     private void mitarbetierZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbetierZuBauauftragActionPerformed
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterKriegtJob(jTable1, jTable2,Arbeiter.mitArbeiterListe.get(jTable1.getSelectedRow()));
+            arbeiterKriegtJob(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
 
         }
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
@@ -270,7 +270,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterWirdArbeitslos(jTable1, jTable2);
+            arbeiterWirdArbeitslos(tableMitarbeiter, tableBauaufträge,Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
         }
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
 
@@ -297,15 +297,15 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
 
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
-        bauauftragVonTabelleEntfernen(jTable2);
+        bauauftragVonTabelleEntfernen(tableBauaufträge);
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
 
     private void bauauftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauauftragÄndernButtonActionPerformed
-        bauAuftragTabelleAbändern(jTable2);
+        bauAuftragTabelleAbändern(tableBauaufträge);
     }//GEN-LAST:event_bauauftragÄndernButtonActionPerformed
 
     private void zugewieseseneArbeiterAnzeigenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
-      new zugewieseneMitArbeiter("zugewiesene Arbetier",jTable2).setVisible(true);
+        new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
     }//GEN-LAST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
 
 
@@ -317,63 +317,32 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JButton bauauftragÄndernButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel mainFrame;
     private javax.swing.JButton mitarbeiterEntfernenButton;
     private javax.swing.JButton mitarbeiterHinzufügenButton;
     private javax.swing.JButton mitarbetierZuBauauftrag;
+    private javax.swing.JTable tableBauaufträge;
+    private javax.swing.JTable tableMitarbeiter;
     private javax.swing.JButton zugewieseseneArbeiterAnzeigenButton;
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-        FirmaGUI gui = new FirmaGUI("Baufirmaa");
-
-        //sonstige Attribute
-        {
-            //-------------------------------------
-            Scanner scanner = new Scanner(System.in);
-            int i = 0;
-            //-------------------------------------
-            //switch caseeeeeeee
-            while (i < 1) {
-                int entscheidung = scanner.nextInt();
-                switch (entscheidung) {
-                    case 1: {
-                        Bauauftrag.AuftragListeAusgeben();
-                        break;
-                    }                   //Bauaufträge entfernen                  //Bauaufträge bearbeiten
-                    
-                    case 2: 
-                    {
-                     Arbeiter.arbeiterListeAusgeben();
-                    }
-                    
-                }
-                if (entscheidung > 10) {
-                    System.out.println("--------------------------");
-                    System.out.println("Junge geht niggis :D");
-                    System.out.println("--------------------------");
-                    System.out.println("------------------------");
-                }
-            }
-        }
-
+        FirmaGUI gui = new FirmaGUI();
     }
 
     //Methoden für den Arbeiter
     //----------------------------------------
     public void ArbeiterZurTabelleHinzufügen() {
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableMitarbeiter.getModel();
         Object[] row = new Object[5];
 
         for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
             row[0] = Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId();
             row[1] = Arbeiter.mitArbeiterListe.get(i).getName();
             row[2] = Arbeiter.mitArbeiterListe.get(i).getBerufsBezeichnung();
-            row[3] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
-            row[4] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
+            row[4] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
+            row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
         }
 
         model.addRow(row);
@@ -382,7 +351,7 @@ public class FirmaGUI extends JFrame {
 
     public void ArbeiterVonTabelleEntfernen(JTable table) {
 
-        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
         if (table.getSelectedRow() != -1) {                                                   // gucken ob die Zeile überhautpt elemente enthält
             Arbeiter.mitArbeiterListe.remove(table.getSelectedRow());
             model.removeRow(table.getSelectedRow());
@@ -390,7 +359,7 @@ public class FirmaGUI extends JFrame {
     }
 
     public void ArbeiterTabelleAbÄndern(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
         if (table.getSelectedRow() != -1) {
             // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
@@ -422,7 +391,7 @@ public class FirmaGUI extends JFrame {
     //Methoden für die Bauaufträge
     //----------------------------------------
     public void bauauftragZurTabelleHinzufügen() {
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableBauaufträge.getModel();
         Object[] row = new Object[7];
 
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
@@ -441,7 +410,7 @@ public class FirmaGUI extends JFrame {
     }
 
     public void bauauftragVonTabelleEntfernen(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) this.jTable2.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
         if (table.getSelectedRow() != -1) {                                                   // gucken ob die Zeile überhautpt elemente enthält
             Bauauftrag.bauAuftragListe.remove(table.getSelectedRow());
             model.removeRow(table.getSelectedRow());
@@ -449,7 +418,7 @@ public class FirmaGUI extends JFrame {
     }
 
     public void bauAuftragTabelleAbändern(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) this.jTable2.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
         if (table.getSelectedRow() != -1) {
             // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
@@ -496,40 +465,49 @@ public class FirmaGUI extends JFrame {
     }
 
     //----------------------------------------
-    public void arbeiterKriegtJob(JTable table1, JTable table2,Arbeiter a1) {
-            
-            
-
-            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
-
-                Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
-                JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
-                Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
-            }
-        }
-
-public void arbeiterWirdArbeitslos(JTable table1, JTable table2) {
+    public void arbeiterKriegtJob(JTable table1, JTable table2, Arbeiter a1) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
-            System.out.println("Wir haben keine Bauaufträge");
+            JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
             return;
         } //checkt erstmal, ob wir überhaupt Mitarbeiter haben :D
+        if (!table1.isRowSelected(table1.getSelectedRow())) {
+            JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
+            return;
+        } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
+        
+        if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == true){
+           JOptionPane.showMessageDialog(null, "Dieser Arbeiter hat schon einen Job");
+           return;
+        }
+        
+        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
 
-        int auswahlIDMitarbeiter = Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getMitarbeiterId();
-        int auswahlIDBauauftrag = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauauftragsID();
+            Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
+            JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
+            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
+        }
+    }
 
-        for (int b = 0; b < Arbeiter.mitArbeiterListe.size(); b++) {
-            if (Arbeiter.mitArbeiterListe.get(b).getHatAuftrag() == true) {
+    public void arbeiterWirdArbeitslos(JTable table1, JTable table2, Arbeiter a1) {
+        if (Bauauftrag.bauAuftragListe.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
+            return;
+        } //checkt erstmal, ob wir überhaupt bauaufträge haben :D
 
-                for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
-                    for (int j = 0; j < Arbeiter.mitArbeiterListe.size(); j++) {
-                        if (Bauauftrag.bauAuftragListe.get(i).getBauauftragsID() == auswahlIDBauauftrag && Arbeiter.mitArbeiterListe.get(j).getMitarbeiterId() == auswahlIDMitarbeiter) {
-                            Bauauftrag.bauAuftragListe.get(i).getBauAuftragMitArbeiter().remove(Arbeiter.mitArbeiterListe.get(j));
-                            System.out.println("Mitarbeiter erfolgreich vom Job entzogen");
-                            Arbeiter.mitArbeiterListe.get(j).setHatAuftrag(false);
-                        }
-                    }
-                }
-            }
+        if (!table1.isRowSelected(table1.getSelectedRow())) {
+            JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
+            return;
+        } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
+        
+        if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false){
+           JOptionPane.showMessageDialog(null, "Dieser Arbeiter ist schon Arbeitslos :pp");
+           return;
+        }
+
+        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == true) {
+            Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
+            JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
+            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
         }
     }
 }

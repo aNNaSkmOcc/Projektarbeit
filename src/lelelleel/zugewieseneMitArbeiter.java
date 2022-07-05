@@ -8,8 +8,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class zugewieseneMitArbeiter extends JFrame {
     
-    public zugewieseneMitArbeiter(String titel,JTable table)   {       //Erstellt das GUIFenster mit dem Titel Baufirma
-        super(titel);
+    public zugewieseneMitArbeiter(JTable table)   {       //Erstellt das GUIFenster mit dem Titel Baufirma
+        
         if(!table.isRowSelected(table.getSelectedRow())){
             JOptionPane.showMessageDialog(null, "Sie müssen einen Bauauftrag auswählen");
             return;
@@ -30,6 +30,10 @@ public class zugewieseneMitArbeiter extends JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setTitle("zugewiesene Arbeiter");
+
+        jPanel1.setName("lelelelle"); // NOI18N
+
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -45,18 +49,18 @@ public class zugewieseneMitArbeiter extends JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +85,7 @@ public class zugewieseneMitArbeiter extends JFrame {
             row[1] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getName();
             row[2] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getBerufsBezeichnung();
             row[3] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getJahresGehalt();
-            row[4] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getJahresGehalt();
+            row[4] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getEinstellungsDatum();
             
         model.addRow(row);
         }

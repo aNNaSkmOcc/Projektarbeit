@@ -20,7 +20,7 @@ public class Bauauftrag extends Arbeiter {
 
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     static LinkedList<Bauauftrag> bauAuftragListe = new LinkedList<Bauauftrag>();
-    static LinkedList<Arbeiter> bauAuftragMitArbeiter;
+    LinkedList<Arbeiter> bauAuftragMitArbeiter;
 
 
     //----------------------
@@ -42,12 +42,7 @@ public class Bauauftrag extends Arbeiter {
         }
         for (int j = 0; j < bauAuftragListe.size(); j++) {
             System.out.println("--------------------------");
-            Collections.sort(bauAuftragListe, new Comparator<Bauauftrag>() {
-                @Override
-                public int compare(Bauauftrag o1, Bauauftrag o2) {
-                    return Integer.valueOf(o1.bauauftragsID).compareTo(o2.bauauftragsID);
-                }
-            });
+            
             System.out.println("AuftragsId: " + bauAuftragListe.get(j).getBauauftragsID());
             System.out.println("Auftragsgeber: " + bauAuftragListe.get(j).getAuftragGeber());
             System.out.println("adresse: " + bauAuftragListe.get(j).getadresse());
@@ -59,7 +54,7 @@ public class Bauauftrag extends Arbeiter {
             if (bauAuftragListe.get(j).getBauAuftragMitArbeiter().isEmpty()) {
                 System.out.println("keine :D ");
             } else {
-                for (int k = 0; k < bauAuftragMitArbeiter.size(); k++) {
+                for (int k = 0; k < bauAuftragListe.get(j).bauAuftragMitArbeiter.size(); k++) {
                     System.out.println("* "+bauAuftragListe.get(j).getBauAuftragMitArbeiter().get(k).getName());
                 }
             }

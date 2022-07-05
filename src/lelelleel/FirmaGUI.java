@@ -486,17 +486,16 @@ public class FirmaGUI extends JFrame {
 
     //----------------------------------------
     public void arbeiterKriegtJob(JTable table1, JTable table2,Arbeiter a1) {
+            
+            
 
-
-        for (int b = 0; b < Arbeiter.mitArbeiterListe.size(); b++) {
-            if (Arbeiter.mitArbeiterListe.get(b).getHatAuftrag() == false) {
+            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
 
                 Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
                 JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
                 Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
             }
         }
-    }
 
 public void arbeiterWirdArbeitslos(JTable table1, JTable table2) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {

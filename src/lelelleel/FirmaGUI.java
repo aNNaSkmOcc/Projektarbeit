@@ -230,7 +230,7 @@ public class FirmaGUI extends JFrame {
         }
 
         if (istVorhanden == false) {
-            Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, einstelDat, jahresGehalt);
+            Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez,jahresGehalt, einstelDat);
             ArbeiterZurTabelleHinzufügen();
         }
     }//GEN-LAST:event_mitarbeiterHinzufügenButtonActionPerformed
@@ -375,7 +375,7 @@ public class FirmaGUI extends JFrame {
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setBerufsBezeichnung(aenderungWort);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Jahresgehalt") {
-                double aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "was wollen sie am Jahresgehalt ändern?"));
+                double aenderungZahl = Double.parseDouble(JOptionPane.showInputDialog(null, "was wollen sie am Jahresgehalt ändern?"));
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setJahresGehalt(aenderungZahl);
             } else if (model.getColumnName(table.getSelectedColumn()) == "EinstellungsDatum") {

@@ -1,4 +1,4 @@
-package lelelleel;
+ package lelelleel;
 
 import javax.swing.*;
 import java.util.*;
@@ -22,9 +22,9 @@ public class Arbeiter {
 
     //methoden
     //-----------------------------------------
-    public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,String einstelDat,double jahresGehalt) {
+    public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,double jahresGehalt,String einstelDat) {
        
-            Arbeiter a1 = new Arbeiter(name, mitarbID, berufsBez, einstelDat, jahresGehalt);
+            Arbeiter a1 = new Arbeiter(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
             mitArbeiterListe.add(a1);
         return a1;
 
@@ -112,7 +112,7 @@ public class Arbeiter {
 
     //konstruktoren
     //-----------------------------------------
-    public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, String einstellungsDatum, double jahresGehalt) {
+    public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, double jahresGehalt,String einstellungsDatum) {
         this.name = name;
         this.mitarbeiterId = mitarbeiterId;
         this.berufsBezeichnung = berufsBezeichnung;

@@ -60,7 +60,7 @@ public class FirmaGUI extends JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Beruf", "Jahresgehalt", "Einstellungsdatum"
+                "ID", "Name", "Beruf", "Jahresgehalt", "Einstellungsdatum", "hat Job"
             }
         ));
         jScrollPane1.setViewportView(tableMitarbeiter);
@@ -139,33 +139,32 @@ public class FirmaGUI extends JFrame {
                 .addContainerGap()
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mitarbetierZuBauauftrag)
-                            .addComponent(arbeiterVonBauauftragLöschenButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(mitarbeiterHinzufügenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterÄndernButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mitarbeiterEntfernenButton)
-                        .addGap(102, 102, 102)))
-                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainFrameLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainFrameLayout.createSequentialGroup()
                                 .addComponent(zugewieseseneArbeiterAnzeigenButton)
                                 .addGap(46, 46, 46)
-                                .addComponent(bauAuftragEntfernenButton))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(bauAuftragEntfernenButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(mainFrameLayout.createSequentialGroup()
+                                .addComponent(bauAufträgeHinzufügenButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bauauftragÄndernButton)
+                                .addGap(72, 72, 72))))
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(bauAufträgeHinzufügenButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bauauftragÄndernButton)
-                        .addGap(72, 72, 72))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mitarbetierZuBauauftrag)
+                            .addComponent(arbeiterVonBauauftragLöschenButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         mainFrameLayout.setVerticalGroup(
             mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +296,7 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
 
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
-        bauauftragVonTabelleEntfernen(tableBauaufträge);
+        bauauftragVonTabelleEntfernen(tableMitarbeiter,tableBauaufträge);
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
 
     private void bauauftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauauftragÄndernButtonActionPerformed
@@ -332,10 +331,10 @@ public class FirmaGUI extends JFrame {
 
     //Methoden für den Arbeiter
     //----------------------------------------
+    Object[] row = new Object[6];
     public void ArbeiterZurTabelleHinzufügen() {
 
         DefaultTableModel model = (DefaultTableModel) tableMitarbeiter.getModel();
-        Object[] row = new Object[5];
 
         for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
             row[0] = Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId();
@@ -343,7 +342,13 @@ public class FirmaGUI extends JFrame {
             row[2] = Arbeiter.mitArbeiterListe.get(i).getBerufsBezeichnung();
             row[4] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
             row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
+            row[5] = Arbeiter.mitArbeiterListe.get(i).getHatAuftrag();
+            if(Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false){
+                row[5]= '✖';
+            }
+            
         }
+        
 
         model.addRow(row);
 
@@ -409,11 +414,15 @@ public class FirmaGUI extends JFrame {
 
     }
 
-    public void bauauftragVonTabelleEntfernen(JTable table) {
+    public void bauauftragVonTabelleEntfernen(JTable table1,JTable table2) {
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
-        if (table.getSelectedRow() != -1) {                                                   // gucken ob die Zeile überhautpt elemente enthält
-            Bauauftrag.bauAuftragListe.remove(table.getSelectedRow());
-            model.removeRow(table.getSelectedRow());
+        if (table2.getSelectedRow() != -1) {       
+            for(int i = 0; i < Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().size();i++){
+                Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).setHatAuftrag(false);
+                table1.setValueAt('✖', i, 5);
+            }
+            Bauauftrag.bauAuftragListe.remove(table2.getSelectedRow());
+            model.removeRow(table2.getSelectedRow());
         }
     }
 
@@ -485,6 +494,7 @@ public class FirmaGUI extends JFrame {
             Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
             JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
             Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
+            table1.setValueAt('✓', table1.getSelectedRow(), 5);
         }
     }
 
@@ -508,6 +518,8 @@ public class FirmaGUI extends JFrame {
             Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
             JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
             Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
+            table1.setValueAt('✖', table1.getSelectedRow(), 5);
         }
     }
+    
 }

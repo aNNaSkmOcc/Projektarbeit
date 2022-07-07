@@ -76,6 +76,11 @@ public class zugewieseneMitArbeiter extends JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void ArbeiterZurTabelleHinzufügen(JTable table2) {
+        
+        if(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Diesem Auftrag, wurden keine Mitarbeiter zugeteilt :D");
+            return;
+        }
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object[] row = new Object[5];

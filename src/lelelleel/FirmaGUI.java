@@ -4,7 +4,12 @@
  */
 package lelelleel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,12 +39,12 @@ public class FirmaGUI extends JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBauaufträge = new javax.swing.JTable();
         arbeiterÄndernButton = new javax.swing.JButton();
-        mitarbetierZuBauauftrag = new javax.swing.JButton();
+        mitarbeiterZuBauauftrag = new javax.swing.JButton();
         arbeiterVonBauauftragLöschenButton = new javax.swing.JButton();
         bauAufträgeHinzufügenButton = new javax.swing.JButton();
-        bauauftragÄndernButton = new javax.swing.JButton();
+        bauAuftragÄndernButton = new javax.swing.JButton();
         bauAuftragEntfernenButton = new javax.swing.JButton();
-        zugewieseseneArbeiterAnzeigenButton = new javax.swing.JButton();
+        zugewieseneArbeiterAnzeigen = new javax.swing.JButton();
         bauAuftragListeExportieren = new javax.swing.JButton();
         mitarbeiterListeExportieren = new javax.swing.JButton();
 
@@ -92,10 +97,10 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        mitarbetierZuBauauftrag.setText(">>");
-        mitarbetierZuBauauftrag.addActionListener(new java.awt.event.ActionListener() {
+        mitarbeiterZuBauauftrag.setText(">>");
+        mitarbeiterZuBauauftrag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitarbetierZuBauauftragActionPerformed(evt);
+                mitarbeiterZuBauauftragActionPerformed(evt);
             }
         });
 
@@ -113,10 +118,10 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        bauauftragÄndernButton.setText("Bauauftrag ändern");
-        bauauftragÄndernButton.addActionListener(new java.awt.event.ActionListener() {
+        bauAuftragÄndernButton.setText("Bauauftrag ändern");
+        bauAuftragÄndernButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bauauftragÄndernButtonActionPerformed(evt);
+                bauAuftragÄndernButtonActionPerformed(evt);
             }
         });
 
@@ -127,10 +132,10 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        zugewieseseneArbeiterAnzeigenButton.setText("zugewiesene Arbeiter anzeigen");
-        zugewieseseneArbeiterAnzeigenButton.addActionListener(new java.awt.event.ActionListener() {
+        zugewieseneArbeiterAnzeigen.setText("zugewiesene Arbeiter anzeigen");
+        zugewieseneArbeiterAnzeigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zugewieseseneArbeiterAnzeigenButtonActionPerformed(evt);
+                zugewieseneArbeiterAnzeigenActionPerformed(evt);
             }
         });
 
@@ -154,7 +159,7 @@ public class FirmaGUI extends JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mitarbetierZuBauauftrag)
+                            .addComponent(mitarbeiterZuBauauftrag)
                             .addComponent(arbeiterVonBauauftragLöschenButton)))
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(mitarbeiterHinzufügenButton)
@@ -163,16 +168,16 @@ public class FirmaGUI extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mitarbeiterEntfernenButton))
                     .addComponent(mitarbeiterListeExportieren))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(bauAufträgeHinzufügenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bauauftragÄndernButton)
+                        .addComponent(bauAuftragÄndernButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bauAuftragListeExportieren))
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(zugewieseseneArbeiterAnzeigenButton)
+                        .addComponent(zugewieseneArbeiterAnzeigen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bauAuftragEntfernenButton))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,19 +192,19 @@ public class FirmaGUI extends JFrame {
                     .addComponent(mitarbeiterEntfernenButton)
                     .addComponent(arbeiterÄndernButton)
                     .addComponent(bauAufträgeHinzufügenButton)
-                    .addComponent(bauauftragÄndernButton)
+                    .addComponent(bauAuftragÄndernButton)
                     .addComponent(bauAuftragListeExportieren))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addComponent(mitarbetierZuBauauftrag)
+                        .addComponent(mitarbeiterZuBauauftrag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterVonBauauftragLöschenButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(zugewieseseneArbeiterAnzeigenButton)
+                            .addComponent(zugewieseneArbeiterAnzeigen)
                             .addComponent(bauAuftragEntfernenButton)
                             .addComponent(mitarbeiterListeExportieren))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,7 +232,13 @@ public class FirmaGUI extends JFrame {
 
     private void mitarbeiterHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterHinzufügenButtonActionPerformed
         String name = JOptionPane.showInputDialog(null, "Name? (Vorname - Nachname)");
-        int mitarbID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        int mitarbID = 0;
+        try{
+        mitarbID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Hier muss eine Zahl eingegeben werden");
+            return;
+        }
         String berufsBez = JOptionPane.showInputDialog(null, "Berufsbezeichnung?");
         double jahresGehalt = Double.parseDouble(JOptionPane.showInputDialog(null, "Jahresgehalt?"));
         String einstelDat = JOptionPane.showInputDialog(null, "Einstellungsdatum?");
@@ -242,8 +253,12 @@ public class FirmaGUI extends JFrame {
         }
 
         if (istVorhanden == false) {
-            Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez,jahresGehalt, einstelDat);
+            try{
+            Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
             ArbeiterZurTabelleHinzufügen();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
+            }
         }
     }//GEN-LAST:event_mitarbeiterHinzufügenButtonActionPerformed
 
@@ -262,7 +277,7 @@ public class FirmaGUI extends JFrame {
         ArbeiterTabelleAbÄndern(tableMitarbeiter);
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
 
-    private void mitarbetierZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbetierZuBauauftragActionPerformed
+    private void mitarbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterZuBauauftragActionPerformed
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
             arbeiterKriegtJob(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
 
@@ -274,26 +289,35 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Arbeiter");
         }
 
-
-    }//GEN-LAST:event_mitarbetierZuBauauftragActionPerformed
+        
+    }//GEN-LAST:event_mitarbeiterZuBauauftragActionPerformed
 
     private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterWirdArbeitslos(tableMitarbeiter, tableBauaufträge,Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
+            arbeiterWirdArbeitslos(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
         }
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
 
     private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAufträgeHinzufügenButtonActionPerformed
-        int bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        
+        int bauauftragID = 0;
+        try{
+        bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Hier muss ein Integer hin diggi");
+            return;
+        }
         String auftragGeber = JOptionPane.showInputDialog(null, "Aufftraggeber?");
         String adresse = JOptionPane.showInputDialog(null, "Adresse ?");
         String ort = JOptionPane.showInputDialog(null, "Ort? ");
         String beschreibungg = JOptionPane.showInputDialog(null, "Was wird dort gemacht? ");
-        String startDatum = JOptionPane.showInputDialog(null, "Startdatum");
-        String endDatumm = JOptionPane.showInputDialog(null, "Enddatum");
+        String EingabeStartDatum = (JOptionPane.showInputDialog(null, "Startdatum? (Bitte die Eingabe in Tag.Monat.Jahr)"));
+        String EingabeEndDatumm = (JOptionPane.showInputDialog(null, "Startdatum? (Bitte die Eingabe in Tag.Monat.Jahr)"));
+        
+        
         boolean istVorhanden = false;
 
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
@@ -303,25 +327,35 @@ public class FirmaGUI extends JFrame {
             }
         }
         if (istVorhanden == false) {
-            Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, startDatum, endDatumm);
-            bauauftragZurTabelleHinzufügen();
+            try {
+                Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, Bauauftrag.stringZuDatumKonvertieren(EingabeStartDatum), Bauauftrag.stringZuDatumKonvertieren(EingabeEndDatumm));
+                bauauftragZurTabelleHinzufügen();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
+            }
         }
+        Bauauftrag.AuftragListeAusgeben();
     }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
 
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
-        bauauftragVonTabelleEntfernen(tableMitarbeiter,tableBauaufträge);
+        bauauftragVonTabelleEntfernen(tableMitarbeiter, tableBauaufträge);
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
 
-    private void bauauftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauauftragÄndernButtonActionPerformed
-        bauAuftragTabelleAbändern(tableBauaufträge);
-    }//GEN-LAST:event_bauauftragÄndernButtonActionPerformed
+    private void bauAuftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragÄndernButtonActionPerformed
+        try {
+            bauAuftragTabelleAbändern(tableBauaufträge);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Ohh irgendwas wurde falsch eingegeben :DD");
+            return;
+        }
+    }//GEN-LAST:event_bauAuftragÄndernButtonActionPerformed
 
-    private void zugewieseseneArbeiterAnzeigenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
+    private void zugewieseneArbeiterAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseneArbeiterAnzeigenActionPerformed
         new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
-    }//GEN-LAST:event_zugewieseseneArbeiterAnzeigenButtonActionPerformed
+    }//GEN-LAST:event_zugewieseneArbeiterAnzeigenActionPerformed
 
     private void mitarbeiterListeExportierenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterListeExportierenActionPerformed
-       
+
     }//GEN-LAST:event_mitarbeiterListeExportierenActionPerformed
 
 
@@ -330,27 +364,28 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JButton arbeiterÄndernButton;
     private javax.swing.JButton bauAuftragEntfernenButton;
     private javax.swing.JButton bauAuftragListeExportieren;
+    private javax.swing.JButton bauAuftragÄndernButton;
     private javax.swing.JButton bauAufträgeHinzufügenButton;
-    private javax.swing.JButton bauauftragÄndernButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainFrame;
     private javax.swing.JButton mitarbeiterEntfernenButton;
     private javax.swing.JButton mitarbeiterHinzufügenButton;
     private javax.swing.JButton mitarbeiterListeExportieren;
-    private javax.swing.JButton mitarbetierZuBauauftrag;
+    private javax.swing.JButton mitarbeiterZuBauauftrag;
     private javax.swing.JTable tableBauaufträge;
     private javax.swing.JTable tableMitarbeiter;
-    private javax.swing.JButton zugewieseseneArbeiterAnzeigenButton;
+    private javax.swing.JButton zugewieseneArbeiterAnzeigen;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         FirmaGUI gui = new FirmaGUI();
     }
 
     //Methoden für den Arbeiter
     //----------------------------------------
     Object[] row = new Object[6];
+
     public void ArbeiterZurTabelleHinzufügen() {
 
         DefaultTableModel model = (DefaultTableModel) tableMitarbeiter.getModel();
@@ -362,12 +397,11 @@ public class FirmaGUI extends JFrame {
             row[4] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
             row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
             row[5] = Arbeiter.mitArbeiterListe.get(i).getHatAuftrag();
-            if(Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false){
-                row[5]= '✖';
+            if (Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false) {
+                row[5] = '✖';
             }
-            
+
         }
-        
 
         model.addRow(row);
 
@@ -402,7 +436,7 @@ public class FirmaGUI extends JFrame {
                 double aenderungZahl = Double.parseDouble(JOptionPane.showInputDialog(null, "was wollen sie am Jahresgehalt ändern?"));
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setJahresGehalt(aenderungZahl);
-            } else if (model.getColumnName(table.getSelectedColumn()) == "EinstellungsDatum") {
+            } else if (model.getColumnName(table.getSelectedColumn()) == "Einstellungsdatum") {
                 String aenderungWort = JOptionPane.showInputDialog(null, "was wollen sie am Einstellungsdatum ändern?");
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setEinstellungsDatum(aenderungWort);
@@ -433,10 +467,10 @@ public class FirmaGUI extends JFrame {
 
     }
 
-    public void bauauftragVonTabelleEntfernen(JTable table1,JTable table2) {
+    public void bauauftragVonTabelleEntfernen(JTable table1, JTable table2) {
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
-        if (table2.getSelectedRow() != -1) {       
-            for(int i = 0; i < Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().size();i++){
+        if (table2.getSelectedRow() != -1) {
+            for (int i = 0; i < Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().size(); i++) {
                 Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).setHatAuftrag(false);
                 table1.setValueAt('✖', i, 5);
             }
@@ -445,7 +479,7 @@ public class FirmaGUI extends JFrame {
         }
     }
 
-    public void bauAuftragTabelleAbändern(JTable table) {
+    public void bauAuftragTabelleAbändern(JTable table) throws ParseException {
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
         if (table.getSelectedRow() != -1) {
             // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 
@@ -480,14 +514,14 @@ public class FirmaGUI extends JFrame {
                 Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setBeschreibung(aenderungWort);
 
             } else if (model.getColumnName(table.getSelectedColumn()) == "Anfangsdatum") {
-                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Anfangsdatum ein");
-                model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
-                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setStartDatum(aenderungWort);
+                String aenderungWort = JOptionPane.showInputDialog(null,"Geben Sie das neue Anfangsdatum ein!!");
+                model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
+                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setEndDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
 
             } else if (model.getColumnName(table.getSelectedColumn()) == "Enddatum") {
-                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Enddatum ein");
-                model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
-                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setEndDatum(aenderungWort);
+                String aenderungWort = JOptionPane.showInputDialog(null,"Geben Sie das neue Anfangsdatum ein!!");
+                model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
+                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setStartDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
             }
         }
     }
@@ -502,21 +536,21 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
             return;
         } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
-        
-        
-        
+
+        for (int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().size(); k++) {
+            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().get(k).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
+                JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter ist bereits beschäftigt");
+                return;
+            }
+
+        }
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
-        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(table2.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
-        //Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
-        
-        for(int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().size();k++){
-        System.out.println(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin());
+
     }
-    }
-    
 
     public void arbeiterWirdArbeitslos(JTable table1, JTable table2, Arbeiter a1) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
@@ -528,18 +562,16 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
             return;
         } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
-        
-        if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false){
-           JOptionPane.showMessageDialog(null, "Dieser Arbeiter ist schon Arbeitslos :pp");
-           return;
+        /*
+        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
+            JOptionPane.showMessageDialog(null, "Dieser Arbeiter ist schon Arbeitslos :pp");
+            return;
         }
+         */
 
-        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == true) {
-            Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
-            JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
-            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
-            table1.setValueAt('✖', table1.getSelectedRow(), 5);
-        }
+        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
+        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
+        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
+        table1.setValueAt('✖', table1.getSelectedRow(), 5);
     }
-    
 }

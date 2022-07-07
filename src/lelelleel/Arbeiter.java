@@ -1,5 +1,10 @@
  package lelelleel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import java.util.*;
 
@@ -17,7 +22,8 @@ public class Arbeiter {
     private String auftragAnfang;
     private String auftragEnde;
     private boolean hatAuftrag;
-    LinkedList <String> auftragsBegin;
+    private LinkedList <LocalDate> auftragsBegin;
+    private LinkedList <LocalDate> auftragsEnde;
     
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     static LinkedList<Arbeiter> mitArbeiterListe = new LinkedList<Arbeiter>();
@@ -33,15 +39,6 @@ public class Arbeiter {
 
     }       //Methode zum erstellen eines Arbeiters
 
-    public static void arbeiterEntfernen() {
-      
-            int delete = Integer.parseInt(JOptionPane.showInputDialog(null,"Welchen Mitarbeiter möchten Sie entfernen?"));
-            for (int k = 0; k < mitArbeiterListe.size(); k++) {
-                if (mitArbeiterListe.get(k).getMitarbeiterId() == delete) {
-                    mitArbeiterListe.remove(k);
-                }
-            }
-        }                  //Um einen Mitarbeiter zu entfernen
 
     public static void arbeiterListeAusgeben() {
         if (mitArbeiterListe.isEmpty()) {
@@ -60,54 +57,12 @@ public class Arbeiter {
         }
     }       //Um alle Mitarbeiter auszugeben
 
-    public static void arbeiterAbändern() {
-    
-        int auswahlID = scanner.nextInt();
-        System.out.println("Was möchten Sie ändern ?");
-        System.out.println("--------------------------");
-        System.out.println("0. Name ändern");
-        System.out.println("1. ID ändern");
-        System.out.println("--------------------------");
-        System.out.print("Auswahl: ");
-        int entscheidung = scanner.nextInt();
-        System.out.println("--------------------------");
-        switch (entscheidung) {
-            case 0: {
-                System.out.println("Geben Sie den neuen Namen ein: ");
-                System.out.print("Neuer Vorname: ");
-                String neuerName = scanner.next();
-                for (int i = 0; i < mitArbeiterListe.size(); i++) {
-                    if (mitArbeiterListe.get(i).getMitarbeiterId() == auswahlID) {
-                        mitArbeiterListe.get(i).setName(neuerName);
-                    }
-                }
-                System.out.println("Der Name wurde erfolgreich geändert");
-                break;
-            }   //Den Namen Editieren
-            case 1: {
-                System.out.print("Geben Sie die neue ID ein: ");
-                int neueID = scanner.nextInt();
-                boolean vorhanden = false;
-                for (int i = 0; i < mitArbeiterListe.size(); i++) {
-                    if (mitArbeiterListe.get(i).getMitarbeiterId() == neueID) {
-                        vorhanden = true;
-                        System.out.println("Diese MitarbeiterID existiert schon");
-                    }
-
-                }
-                if (vorhanden == false) {
-                    for (int k = 0; k < mitArbeiterListe.size(); k++) {
-                        if (mitArbeiterListe.get(k).getMitarbeiterId() == auswahlID) {
-                            mitArbeiterListe.get(k).setMitarbeiterId(neueID);
-                            System.out.println("Die MitarbeiterID wurde erfolgreich geändert");
-                        }
-                    }
-                }
-                break;
-            }   //Die MitarbeiterID editieren
-
-        }
-    }           //Um einzelne Mitarbeiter zu bearbeiten :DD
+    public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
+       
+    LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+       
+    return datee;
+    }
 
 
     //-----------------------------------------
@@ -122,11 +77,12 @@ public class Arbeiter {
         this.einstellungsDatum = einstellungsDatum;
         this.jahresGehalt = jahresGehalt;
         this.hatAuftrag = false;
-        auftragsBegin = new LinkedList<String>();
+        auftragsBegin = new LinkedList<LocalDate>();
+        auftragsEnde = new LinkedList<LocalDate>();
     }   //Konstruktor zum erstellen von Arbeitern
 
     public Arbeiter() {
-    }               //Standartkonstruktor für die Veerbung nach Bauauftrag
+    }               
     //-----------------------------------------
 
     //getter & setter
@@ -189,8 +145,14 @@ public class Arbeiter {
     public static void listeZuArray(){
         mitArbeiterListe.toArray();
     }
-    public LinkedList<String> getAuftragsbegin(){
+    public LinkedList<LocalDate> getAuftragsbegin(){
         return auftragsBegin;
+    }
+    public static String stringZuDatumKonvertieren(Date date) throws ParseException{
+        
+       String format = new SimpleDateFormat("dd.MM.yyyy").format(date);
+       
+        return format;
     }
 
     //-----------------------------------------

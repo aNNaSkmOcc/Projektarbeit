@@ -1,10 +1,16 @@
 package lelelleel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import lelelleel.Arbeiter;
 import java.util.*;
 import javax.swing.SpringLayout;
 
-public class Bauauftrag extends Arbeiter {
+public class Bauauftrag{
 
 
     //Attribute
@@ -13,8 +19,8 @@ public class Bauauftrag extends Arbeiter {
     private String ort;
     private String adresse;
     private String beschreibung;
-    private String startDatum;
-    private String endDatum;
+    private LocalDate startDatum;
+    private LocalDate endDatum;
     private int bauauftragsID;
     
 
@@ -27,7 +33,7 @@ public class Bauauftrag extends Arbeiter {
 
     //Methoden
 
-    public static Bauauftrag bauauftragErstellen(String auftragGeber, String ort, int bauauftragsID, String adresse, String beschreibung, String startDatum, String endDatum) {
+    public static Bauauftrag bauauftragErstellen(String auftragGeber, String ort, int bauauftragsID, String adresse, String beschreibung, LocalDate startDatum, LocalDate endDatum) {
         
         
         Bauauftrag b1 = new Bauauftrag(bauauftragsID,auftragGeber,adresse, ort, beschreibung, startDatum, endDatum);
@@ -85,132 +91,20 @@ public class Bauauftrag extends Arbeiter {
             }
         }
     }
-
-
-    public static void bauauftragändern() {
-        if (bauAuftragListe.isEmpty()) {
-            System.out.println("Du hast keine Mitarbeiter du Opferrrr");
-            return;
-        } //Wenn die Liste leer ist, dann gib bescheid :D
-
-        System.out.println("Welchen Bauauftrag möchtest du abändern? (ID-Eingeben)");
-
-        for (int j = 0; j < bauAuftragListe.size(); j++) {
-            System.out.println("BauauftragsID: " + bauAuftragListe.get(j).getBauauftragsID());
-            System.out.println("Auftraggeber: " + bauAuftragListe.get(j).getAuftragGeber());
-            System.out.println("Nachname: " + bauAuftragListe.get(j).getadresse());
-            System.out.println("Vorname: " + bauAuftragListe.get(j).getOrt());
-        } //Gibt alle Mitarbeiter für die Auswahl aus
-
-        int auswahlID = scanner.nextInt();
-        System.out.println("Was möchten Sie ändern ?");
-        System.out.println("--------------------------");
-        System.out.println("0. Beschreibung ändern");
-        System.out.println("1. Start/Enddatum ändern");
-        System.out.println("2. ID ändern");
-        System.out.println("--------------------------");
-        System.out.print("Auswahl: ");
-        int entscheidung = scanner.nextInt();
-        System.out.println("--------------------------");
-        switch (entscheidung) {
-            case 0: {
-                System.out.print("Geben Sie die neue Beschreibung ein: ");
-                System.out.print("Neue Beschreibung ");
-                String neueBeschreibung = scanner.next();
-                for (int i = 0; i < bauAuftragListe.size(); i++) {
-                    if (bauAuftragListe.get(i).getBauauftragsID() == auswahlID) {
-                        bauAuftragListe.get(i).setBeschreibung(neueBeschreibung.toUpperCase());
-                    }
-                }
-                System.out.println("Die Beschreibung wurde Erfolgreich geändert");
-                break;
-            }   //Die Beschreibung editieren
-            case 1: {
-                System.out.print("Geben Sie das Startdatum ein ein: ");
-                String neuerStartDatum = scanner.next();
-                System.out.println("Geben Sie das neue Enddatum ein");
-                String neuesEndDatum = scanner.next();
-                for (int i = 0; i < bauAuftragListe.size(); i++) {
-                    if (bauAuftragListe.get(i).bauauftragsID == auswahlID) {
-                        bauAuftragListe.get(i).setStartDatum(neuerStartDatum.toUpperCase());
-                    }// Die Auftragszeit ändern
-                }
-                System.out.println("Der Start und Enddatum wurden erfolgreich geändert");
-                break;
-            }   //Das Auftragsdatum ändern
-            case 2: {
-                System.out.print("Geben Sie die neue ID ein: ");
-                int neueID = scanner.nextInt();
-                boolean vorhanden = false;
-                for (int i = 0; i < bauAuftragListe.size(); i++) {
-                    if (bauAuftragListe.get(i).getBauauftragsID() == neueID) {
-                        vorhanden = true;
-                        System.out.println("Diese BauauftragsID existiert schon");
-                    }
-
-                }
-            }
-        }
-    }
-
-
-    public static void arbeiterZuBauAuftragHinzufügen(Arbeiter a1) {
-        //Bauaufträge
     
-        
-
+    public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
+       
+       LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+       
+       return datee;
     }
     
     
-    public static void arbeiterVonAuftragEntfernen() {
-            if (bauAuftragListe.isEmpty()) {
-                System.out.println("Wir haben keine Bauaufträge");
-                return;
-            } //checkt erstmal, ob wir überhaupt Mitarbeiter haben :D
-            System.out.println("Aus welchem Auftrag möchtest du ? (ID-eingeben)");
-            for (int a = 0; a < bauAuftragListe.size(); a++) {
-                System.out.println("--------------------------");
-                System.out.println("BauauftragsID: " + bauAuftragListe.get(a).getBauauftragsID());
-                System.out.println("Auftraggeber: " + bauAuftragListe.get(a).getAuftragGeber());
-                System.out.println("Adresse: " + bauAuftragListe.get(a).getadresse());
-                System.out.println("Ort: " + bauAuftragListe.get(a).getOrt());
-                System.out.println("--------------------------");
-            } //gib alle Bauaufträge aus die ich habe :D
-            int auswahlIDBauauftag = scanner.nextInt();            //wähl aus von wem du das haben möchtest :D
 
-            for (int b = 0; b < mitArbeiterListe.size(); b++) {
-                if (mitArbeiterListe.get(b).getHatAuftrag() == true) {
-                    System.out.println("--------------------------");
-                    Collections.sort(mitArbeiterListe, new Comparator<Arbeiter>() {
-                        @Override
-                        public int compare(Arbeiter o1, Arbeiter o2) {
-                            return Integer.valueOf(o1.getMitarbeiterId()).compareTo(o2.getMitarbeiterId());
-                        }
-                    }); //sortiert die Mitarbeiter nach der ID :D
-
-                    System.out.println("MitarbeiterID: " + mitArbeiterListe.get(b).getMitarbeiterId());
-                    System.out.println("Name: " + mitArbeiterListe.get(b).getName());
-                    System.out.println("Berufsbezeichnung: " + mitArbeiterListe.get(b).getBerufsBezeichnung());
-                    System.out.println("--------------------------");
-                }
-            } //gib alle Mitarbeiter aus die ich habe :D
-            int auswahlIDMitarbeiter = scanner.nextInt();           //such aus, welchen mitarbeiter du rauskicken möchtest .DD
-
-            for(int i = 0; i < bauAuftragListe.size();i++){
-                for(int j = 0; j < mitArbeiterListe.size();j++){
-                    if(bauAuftragListe.get(i).getBauauftragsID() == auswahlIDBauauftag && mitArbeiterListe.get(j).getMitarbeiterId() == auswahlIDMitarbeiter){
-                        bauAuftragListe.get(i).getBauAuftragMitArbeiter().remove(mitArbeiterListe.get(j));
-                        System.out.println("Mitarbeiter erfolgreich vom Job entzogen");
-                        mitArbeiterListe.get(j).setHatAuftrag(false);
-                    }
-                }
-            }
-        }
-
-
+   
     //Konstruktor
     //----------------------
-    public Bauauftrag(int bauauftragsID, String auftragGeber, String adresse, String ort ,String beschreibung, String startDatum, String endDatum) {
+    public Bauauftrag(int bauauftragsID, String auftragGeber, String adresse, String ort ,String beschreibung, LocalDate startDatum, LocalDate endDatum) {
         super();
         this.bauAuftragMitArbeiter = new LinkedList<Arbeiter>();
         this.auftragGeber = auftragGeber;
@@ -268,20 +162,20 @@ public class Bauauftrag extends Arbeiter {
     }
 
 
-    public String getStartDatum() {
+    public LocalDate getStartDatum() {
         return startDatum;
     }
 
-    public void setStartDatum(String startDatum) {
+    public void setStartDatum(LocalDate startDatum) {
         this.startDatum = startDatum;
     }
 
 
-    public String getEndDatum() {
+    public LocalDate getEndDatum() {
         return endDatum;
     }
 
-    public void setEndDatum(String endDatum) {
+    public void setEndDatum(LocalDate endDatum) {
         this.endDatum = endDatum;
     }
 

@@ -14,8 +14,11 @@ public class Arbeiter {
     private String berufsBezeichnung;
     private String einstellungsDatum;
     private double jahresGehalt;
-
+    private String auftragAnfang;
+    private String auftragEnde;
     private boolean hatAuftrag;
+    LinkedList <String> auftragsBegin;
+    
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     static LinkedList<Arbeiter> mitArbeiterListe = new LinkedList<Arbeiter>();
     //-----------------------------------------
@@ -119,6 +122,7 @@ public class Arbeiter {
         this.einstellungsDatum = einstellungsDatum;
         this.jahresGehalt = jahresGehalt;
         this.hatAuftrag = false;
+        auftragsBegin = new LinkedList<String>();
     }   //Konstruktor zum erstellen von Arbeitern
 
     public Arbeiter() {
@@ -184,6 +188,9 @@ public class Arbeiter {
 
     public static void listeZuArray(){
         mitArbeiterListe.toArray();
+    }
+    public LinkedList<String> getAuftragsbegin(){
+        return auftragsBegin;
     }
 
     //-----------------------------------------

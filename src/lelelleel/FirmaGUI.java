@@ -74,6 +74,7 @@ public class FirmaGUI extends JFrame {
             }
         });
 
+        tableBauaufträge.setAutoCreateRowSorter(true);
         tableBauaufträge.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -502,19 +503,20 @@ public class FirmaGUI extends JFrame {
             return;
         } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
         
-        if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == true){
-           JOptionPane.showMessageDialog(null, "Dieser Arbeiter hat schon einen Job");
-           return;
-        }
         
-        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getHatAuftrag() == false) {
-
-            Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
-            JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
-            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
-            table1.setValueAt('✓', table1.getSelectedRow(), 5);
-        }
+        
+        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
+        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(table2.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
+        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
+        //Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        table1.setValueAt('✓', table1.getSelectedRow(), 5);
+        
+        for(int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().size();k++){
+        System.out.println(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin());
     }
+    }
+    
 
     public void arbeiterWirdArbeitslos(JTable table1, JTable table2, Arbeiter a1) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {

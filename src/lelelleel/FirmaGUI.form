@@ -54,39 +54,39 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="mitarbeiterHinzufügenButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="arbeiterÄndernButton" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="mitarbeiterEntfernenButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="zugewieseseneArbeiterAnzeigenButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                  <Component id="bauAuftragEntfernenButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="bauAufträgeHinzufügenButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="bauauftragÄndernButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="481" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="mitarbetierZuBauauftrag" min="-2" max="-2" attributes="0"/>
                               <Component id="arbeiterVonBauauftragLöschenButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="20" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="497" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="mitarbeiterHinzufügenButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="arbeiterÄndernButton" min="-2" pref="127" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="mitarbeiterEntfernenButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="mitarbeiterListeExportieren" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="bauAufträgeHinzufügenButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="bauauftragÄndernButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="bauAuftragListeExportieren" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="zugewieseseneArbeiterAnzeigenButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="bauAuftragEntfernenButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane2" min="-2" pref="497" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,14 +94,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mitarbeiterHinzufügenButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="mitarbeiterEntfernenButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="arbeiterÄndernButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bauAufträgeHinzufügenButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="bauauftragÄndernButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="mitarbeiterHinzufügenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mitarbeiterEntfernenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="arbeiterÄndernButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bauAufträgeHinzufügenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bauauftragÄndernButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bauAuftragListeExportieren" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -116,6 +115,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="zugewieseseneArbeiterAnzeigenButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bauAuftragEntfernenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="mitarbeiterListeExportieren" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -327,6 +327,19 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zugewieseseneArbeiterAnzeigenButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bauAuftragListeExportieren">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bauauftragsliste exportieren"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="mitarbeiterListeExportieren">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Miarbeiterliste exportieren"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitarbeiterListeExportierenActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -61,7 +61,6 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        tableMitarbeiter.setAutoCreateRowSorter(true);
         tableMitarbeiter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -79,7 +78,6 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        tableBauaufträge.setAutoCreateRowSorter(true);
         tableBauaufträge.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -232,13 +230,15 @@ public class FirmaGUI extends JFrame {
 
     private void mitarbeiterHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterHinzufügenButtonActionPerformed
         String name = JOptionPane.showInputDialog(null, "Name? (Vorname - Nachname)");
+
         int mitarbID = 0;
-        try{
-        mitarbID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
-        }catch (Exception e){
+        try {
+            mitarbID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Hier muss eine Zahl eingegeben werden");
             return;
         }
+
         String berufsBez = JOptionPane.showInputDialog(null, "Berufsbezeichnung?");
         double jahresGehalt = Double.parseDouble(JOptionPane.showInputDialog(null, "Jahresgehalt?"));
         String einstelDat = JOptionPane.showInputDialog(null, "Einstellungsdatum?");
@@ -253,10 +253,10 @@ public class FirmaGUI extends JFrame {
         }
 
         if (istVorhanden == false) {
-            try{
-            Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
-            ArbeiterZurTabelleHinzufügen();
-            }catch(Exception e){
+            try {
+                Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
+                ArbeiterZurTabelleHinzufügen();
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
             }
         }
@@ -289,7 +289,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Arbeiter");
         }
 
-        
+
     }//GEN-LAST:event_mitarbeiterZuBauauftragActionPerformed
 
     private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
@@ -302,22 +302,21 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
 
     private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAufträgeHinzufügenButtonActionPerformed
-        
+
         int bauauftragID = 0;
-        try{
-        bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Hier muss ein Integer hin diggi");
+        try {
+            bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hier muss ein Integer hin diggi");
             return;
         }
         String auftragGeber = JOptionPane.showInputDialog(null, "Aufftraggeber?");
         String adresse = JOptionPane.showInputDialog(null, "Adresse ?");
         String ort = JOptionPane.showInputDialog(null, "Ort? ");
         String beschreibungg = JOptionPane.showInputDialog(null, "Was wird dort gemacht? ");
-        String EingabeStartDatum = (JOptionPane.showInputDialog(null, "Startdatum? (Bitte die Eingabe in Tag.Monat.Jahr)"));
-        String EingabeEndDatumm = (JOptionPane.showInputDialog(null, "Startdatum? (Bitte die Eingabe in Tag.Monat.Jahr)"));
-        
-        
+        String eingabeStartDatum = (JOptionPane.showInputDialog(null, "Startdatum? (Bitte die Eingabe in dd(Tage) - mm(Monat in Zahl) - yyyy(Jahr))"));
+        String eingabeEndDatumm = (JOptionPane.showInputDialog(null, "Enddatum? (Bitte die Eingabe in dd(Tage) - mm(Monat in Zahl) - yyyy(Jahr))"));
+
         boolean istVorhanden = false;
 
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
@@ -328,10 +327,10 @@ public class FirmaGUI extends JFrame {
         }
         if (istVorhanden == false) {
             try {
-                Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, Bauauftrag.stringZuDatumKonvertieren(EingabeStartDatum), Bauauftrag.stringZuDatumKonvertieren(EingabeEndDatumm));
+                Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, Bauauftrag.stringZuDatumKonvertieren(eingabeStartDatum), Bauauftrag.stringZuDatumKonvertieren(eingabeEndDatumm));
                 bauauftragZurTabelleHinzufügen();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
+                JOptionPane.showMessageDialog(null, "Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
             }
         }
         Bauauftrag.AuftragListeAusgeben();
@@ -378,7 +377,7 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JButton zugewieseneArbeiterAnzeigen;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         FirmaGUI gui = new FirmaGUI();
     }
 
@@ -514,12 +513,12 @@ public class FirmaGUI extends JFrame {
                 Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setBeschreibung(aenderungWort);
 
             } else if (model.getColumnName(table.getSelectedColumn()) == "Anfangsdatum") {
-                String aenderungWort = JOptionPane.showInputDialog(null,"Geben Sie das neue Anfangsdatum ein!!");
+                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Anfangsdatum ein!!");
                 model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
                 Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setEndDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
 
             } else if (model.getColumnName(table.getSelectedColumn()) == "Enddatum") {
-                String aenderungWort = JOptionPane.showInputDialog(null,"Geben Sie das neue Anfangsdatum ein!!");
+                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Enddatum ein!!");
                 model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
                 Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setStartDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
             }
@@ -537,18 +536,29 @@ public class FirmaGUI extends JFrame {
             return;
         } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
 
-        for (int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().size(); k++) {
-            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().get(k).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
-                JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter ist bereits beschäftigt");
+        for (int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
+            
+            if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
+                JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
                 return;
             }
-
-        }
+            else if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
+                JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
+                return;
+            }
+            
+            }
+ 
+        
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
-        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsbegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        
+        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
+        
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
+        System.out.println("anfangsdaten"+Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin());
 
     }
 
@@ -570,8 +580,18 @@ public class FirmaGUI extends JFrame {
          */
 
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
-        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
+        
+        for(int i = 0; i < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size();i++){
+            if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(i).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())){
+            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(i);
+            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(i);
+        }
+        }
+        
+        if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().isEmpty()){
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
         table1.setValueAt('✖', table1.getSelectedRow(), 5);
+        }
+        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
     }
 }

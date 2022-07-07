@@ -81,8 +81,7 @@ public class Arbeiter {
         auftragsEnde = new LinkedList<LocalDate>();
     }   //Konstruktor zum erstellen von Arbeitern
 
-    public Arbeiter() {
-    }               
+                 
     //-----------------------------------------
 
     //getter & setter
@@ -145,9 +144,13 @@ public class Arbeiter {
     public static void listeZuArray(){
         mitArbeiterListe.toArray();
     }
-    public LinkedList<LocalDate> getAuftragsbegin(){
+    public LinkedList<LocalDate> getAuftragsBegin(){
         return auftragsBegin;
     }
+    public LinkedList<LocalDate> getAuftragsEnde(){
+        return auftragsEnde;
+    }
+    
     public static String stringZuDatumKonvertieren(Date date) throws ParseException{
         
        String format = new SimpleDateFormat("dd.MM.yyyy").format(date);

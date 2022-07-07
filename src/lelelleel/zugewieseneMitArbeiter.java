@@ -10,6 +10,11 @@ public class zugewieseneMitArbeiter extends JFrame {
     
     public zugewieseneMitArbeiter(JTable table)   {       //Erstellt das GUIFenster mit dem Titel Baufirma
         
+        if(Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Diesem Auftrag, wurden keine Mitarbeiter zugeteilt :D");
+            return;
+        }
+        
         if(!table.isRowSelected(table.getSelectedRow())){
             JOptionPane.showMessageDialog(null, "Sie müssen einen Bauauftrag auswählen");
             return;
@@ -77,10 +82,6 @@ public class zugewieseneMitArbeiter extends JFrame {
 
     public void ArbeiterZurTabelleHinzufügen(JTable table2) {
         
-        if(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Diesem Auftrag, wurden keine Mitarbeiter zugeteilt :D");
-            return;
-        }
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object[] row = new Object[5];

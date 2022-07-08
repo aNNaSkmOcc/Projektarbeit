@@ -9,8 +9,6 @@ import javax.swing.*;
 import java.util.*;
 
 public class Arbeiter {
-
-
     //Attribute
 
     //-----------------------------------------
@@ -39,7 +37,6 @@ public class Arbeiter {
 
     }       //Methode zum erstellen eines Arbeiters
 
-
     public static void arbeiterListeAusgeben() {
         if (mitArbeiterListe.isEmpty()) {
             System.out.println("Die Liste ist Leer du spasti :D");
@@ -59,8 +56,9 @@ public class Arbeiter {
 
     public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
        
-    LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-       
+    LocalDate datee = LocalDate.parse(datum);
+    
+    
     return datee;
     }
 

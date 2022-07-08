@@ -17,7 +17,7 @@ public class Arbeiter {
     private String name;
     private int mitarbeiterId;
     private String berufsBezeichnung;
-    private String einstellungsDatum;
+    private LocalDate einstellungsDatum;
     private double jahresGehalt;
     private String auftragAnfang;
     private String auftragEnde;
@@ -31,7 +31,7 @@ public class Arbeiter {
 
     //methoden
     //-----------------------------------------
-    public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,double jahresGehalt,String einstelDat) {
+    public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,double jahresGehalt,LocalDate einstelDat) {
        
             Arbeiter a1 = new Arbeiter(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
             mitArbeiterListe.add(a1);
@@ -70,7 +70,7 @@ public class Arbeiter {
 
     //konstruktoren
     //-----------------------------------------
-    public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, double jahresGehalt,String einstellungsDatum) {
+    public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, double jahresGehalt,LocalDate einstellungsDatum) {
         this.name = name;
         this.mitarbeiterId = mitarbeiterId;
         this.berufsBezeichnung = berufsBezeichnung;
@@ -113,11 +113,11 @@ public class Arbeiter {
     }
 
 
-    public String getEinstellungsDatum() {
+    public LocalDate getEinstellungsDatum() {
         return einstellungsDatum;
     }
 
-    public void setEinstellungsDatum(String einstellungsDatum) {
+    public void setEinstellungsDatum(LocalDate einstellungsDatum) {
         this.einstellungsDatum = einstellungsDatum;
     }
 

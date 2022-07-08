@@ -274,15 +274,15 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
 
     private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterÄndernButtonActionPerformed
-        try{
-        if (Arbeiter.mitArbeiterListe.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
-        }
-        ArbeiterTabelleAbÄndern(tableMitarbeiter);
-        }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Da ist irgendwas nicht richtig gewesen :DD");
-                };
-        
+        try {
+            if (Arbeiter.mitArbeiterListe.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
+            }
+            ArbeiterTabelleAbÄndern(tableMitarbeiter);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Da ist irgendwas nicht richtig gewesen :DD");
+        };
+
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
 
     private void mitarbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterZuBauauftragActionPerformed
@@ -362,7 +362,7 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_zugewieseneArbeiterAnzeigenActionPerformed
 
     private void mitarbeiterListeExportierenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterListeExportierenActionPerformed
-        
+
     }//GEN-LAST:event_mitarbeiterListeExportierenActionPerformed
 
 
@@ -404,7 +404,7 @@ public class FirmaGUI extends JFrame {
             row[4] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
             row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
             row[5] = Arbeiter.mitArbeiterListe.get(i).getHatAuftrag();
-            
+
             if (Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false) {
                 row[5] = '✖';
             }
@@ -547,16 +547,21 @@ public class FirmaGUI extends JFrame {
 
         for (int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
 
-            if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())) {
+            if (Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum()) == true) {
+                JOptionPane.showMessageDialog(null, "Der Arbeiter wurde zu diesem Zeitpunkt noch nicht eingestellt :DD");
+                return;
+            }
+
+            if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()) == true) {
                 JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
                 return;
-            } else if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())) {
+            }
+            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()) == true) {
                 JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
                 return;
             }
 
         }
-
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
 
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
@@ -565,7 +570,7 @@ public class FirmaGUI extends JFrame {
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
-        System.out.println("anfangsdaten" + Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin());
+        System.out.println(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum()));
 
     }
 
@@ -601,24 +606,24 @@ public class FirmaGUI extends JFrame {
         }
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
     }
-    
-    public void exportDerDateien(JTable table1, File file){
-        try{
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        FileWriter fw = new FileWriter(file);
-        
-        for(int j = 0; j < model.getColumnCount();j++){
+
+    public void exportDerDateien(JTable table1, File file) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) table1.getModel();
+            FileWriter fw = new FileWriter(file);
+
+            for (int j = 0; j < model.getColumnCount(); j++) {
                 fw.write(model.getColumnName(j) + "\t");
             }
-        
-        for(int i = 0; i < model.getRowCount();i++){
-            for(int j = 0; j < model.getColumnCount();j++){
-                fw.write(model.getValueAt(i, j).toString()+"\t");
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    fw.write(model.getValueAt(i, j).toString() + "\t");
+                }
+                fw.write("\n");
             }
-            fw.write("\n");
-        }
-        fw.close();
-        }catch(Exception e){
+            fw.close();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "asdasdasd");
         }
     }

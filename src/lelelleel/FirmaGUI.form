@@ -56,9 +56,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="481" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="mitarbeiterZuBauauftrag" min="-2" max="-2" attributes="0"/>
-                              <Component id="arbeiterVonBauauftragLöschenButton" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="arbeiterVonBauauftragLöschenButton" max="32767" attributes="0"/>
+                              <Component id="mitarbeiterZuBauauftrag" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -68,7 +68,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="mitarbeiterEntfernenButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="mitarbeiterListeExportieren" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -115,7 +114,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="zugewieseneArbeiterAnzeigen" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bauAuftragEntfernenButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="mitarbeiterListeExportieren" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -282,7 +280,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="mitarbeiterZuBauauftrag">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+            <Property name="text" type="java.lang.String" value="Arbeit geben"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitarbeiterZuBauauftragActionPerformed"/>
@@ -290,7 +288,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="arbeiterVonBauauftragL&#xf6;schenButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+            <Property name="text" type="java.lang.String" value="Arbeit entfernen"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arbeiterVonBauauftragL&#xf6;schenButtonActionPerformed"/>
@@ -332,14 +330,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Bauauftragsliste exportieren"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="mitarbeiterListeExportieren">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Miarbeiterliste exportieren"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitarbeiterListeExportierenActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -49,7 +49,6 @@ public class FirmaGUI extends JFrame {
         bauAuftragEntfernenButton = new javax.swing.JButton();
         zugewieseneArbeiterAnzeigen = new javax.swing.JButton();
         bauAuftragListeExportieren = new javax.swing.JButton();
-        mitarbeiterListeExportieren = new javax.swing.JButton();
 
         setTitle("A&C - GmbH & Co.KG");
         setLocation(new java.awt.Point(0, 0));
@@ -98,14 +97,14 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        mitarbeiterZuBauauftrag.setText(">>");
+        mitarbeiterZuBauauftrag.setText("Arbeit geben");
         mitarbeiterZuBauauftrag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mitarbeiterZuBauauftragActionPerformed(evt);
             }
         });
 
-        arbeiterVonBauauftragLöschenButton.setText("<<");
+        arbeiterVonBauauftragLöschenButton.setText("Arbeit entfernen");
         arbeiterVonBauauftragLöschenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 arbeiterVonBauauftragLöschenButtonActionPerformed(evt);
@@ -142,13 +141,6 @@ public class FirmaGUI extends JFrame {
 
         bauAuftragListeExportieren.setText("Bauauftragsliste exportieren");
 
-        mitarbeiterListeExportieren.setText("Miarbeiterliste exportieren");
-        mitarbeiterListeExportieren.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitarbeiterListeExportierenActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout mainFrameLayout = new javax.swing.GroupLayout(mainFrame);
         mainFrame.setLayout(mainFrameLayout);
         mainFrameLayout.setHorizontalGroup(
@@ -159,16 +151,15 @@ public class FirmaGUI extends JFrame {
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mitarbeiterZuBauauftrag)
-                            .addComponent(arbeiterVonBauauftragLöschenButton)))
+                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(arbeiterVonBauauftragLöschenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mitarbeiterZuBauauftrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(mitarbeiterHinzufügenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterÄndernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mitarbeiterEntfernenButton))
-                    .addComponent(mitarbeiterListeExportieren))
+                        .addComponent(mitarbeiterEntfernenButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
@@ -206,8 +197,7 @@ public class FirmaGUI extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(zugewieseneArbeiterAnzeigen)
-                            .addComponent(bauAuftragEntfernenButton)
-                            .addComponent(mitarbeiterListeExportieren))
+                            .addComponent(bauAuftragEntfernenButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
@@ -361,10 +351,6 @@ public class FirmaGUI extends JFrame {
         new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
     }//GEN-LAST:event_zugewieseneArbeiterAnzeigenActionPerformed
 
-    private void mitarbeiterListeExportierenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterListeExportierenActionPerformed
-
-    }//GEN-LAST:event_mitarbeiterListeExportierenActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
@@ -378,7 +364,6 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JPanel mainFrame;
     private javax.swing.JButton mitarbeiterEntfernenButton;
     private javax.swing.JButton mitarbeiterHinzufügenButton;
-    private javax.swing.JButton mitarbeiterListeExportieren;
     private javax.swing.JButton mitarbeiterZuBauauftrag;
     private javax.swing.JTable tableBauaufträge;
     private javax.swing.JTable tableMitarbeiter;

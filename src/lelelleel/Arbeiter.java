@@ -17,8 +17,6 @@ public class Arbeiter {
     private String berufsBezeichnung;
     private LocalDate einstellungsDatum;
     private double jahresGehalt;
-    private String auftragAnfang;
-    private String auftragEnde;
     private boolean hatAuftrag;
     private LinkedList <LocalDate> auftragsBegin;
     private LinkedList <LocalDate> auftragsEnde;
@@ -27,16 +25,21 @@ public class Arbeiter {
     static LinkedList<Arbeiter> mitArbeiterListe = new LinkedList<Arbeiter>();
     //-----------------------------------------
 
-    //methoden
+    
     //-----------------------------------------
+    //Methode zum erstellen eines Arbeiters
     public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,double jahresGehalt,LocalDate einstelDat) {
        
             Arbeiter a1 = new Arbeiter(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
             mitArbeiterListe.add(a1);
         return a1;
 
-    }       //Methode zum erstellen eines Arbeiters
-
+    }       
+    //-----------------------------------------
+    
+    
+    //-----------------------------------------
+    //Um alle Mitarbeiter auszugeben
     public static void arbeiterListeAusgeben() {
         if (mitArbeiterListe.isEmpty()) {
             System.out.println("Die Liste ist Leer du spasti :D");
@@ -52,16 +55,18 @@ public class Arbeiter {
             System.out.println("Jahresgehalt: " + mitArbeiterListe.get(j).getJahresGehalt());
             System.out.println("--------------------------");
         }
-    }       //Um alle Mitarbeiter auszugeben
-
+    }
+    //-----------------------------------------
+    
+    //-----------------------------------------
+    //Um eine Stringeingabe zu einem Datum zu konvertieren
     public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
        
-    LocalDate datee = LocalDate.parse(datum);
-    
+    LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     
     return datee;
     }
-
+    //-----------------------------------------
 
     //-----------------------------------------
 

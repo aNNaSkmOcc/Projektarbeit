@@ -1,5 +1,7 @@
  package lelelleel;
 
+ //Importe
+ //-----------------------------------------
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,10 +9,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import java.util.*;
+ //-----------------------------------------
 
+ 
 public class Arbeiter {
+    
     //Attribute
-
     //-----------------------------------------
     private String name;
     private int mitarbeiterId;
@@ -71,8 +75,8 @@ public class Arbeiter {
     //-----------------------------------------
 
 
-    //konstruktoren
     //-----------------------------------------
+    //Konstruktor
     public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, double jahresGehalt,LocalDate einstellungsDatum) {
         this.name = name;
         this.mitarbeiterId = mitarbeiterId;
@@ -82,27 +86,20 @@ public class Arbeiter {
         this.hatAuftrag = false;
         auftragsBegin = new LinkedList<LocalDate>();
         auftragsEnde = new LinkedList<LocalDate>();
-    }   //Konstruktor zum erstellen von Arbeitern
-
-                 
+    }         
     //-----------------------------------------
 
     //getter & setter
-
     //-----------------------------------------
-
     public int getMitarbeiterId() {
         return mitarbeiterId;
     }
-
     public void setMitarbeiterId(int mitarbeiterId) {
         this.mitarbeiterId = mitarbeiterId;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
@@ -114,7 +111,6 @@ public class Arbeiter {
     public void setBerufsBezeichnung(String berufsBezeichnung) {
         this.berufsBezeichnung = berufsBezeichnung;
     }
-
 
     public LocalDate getEinstellungsDatum() {
         return einstellungsDatum;
@@ -147,9 +143,11 @@ public class Arbeiter {
     public static void listeZuArray(){
         mitArbeiterListe.toArray();
     }
+    
     public LinkedList<LocalDate> getAuftragsBegin(){
         return auftragsBegin;
     }
+    
     public LinkedList<LocalDate> getAuftragsEnde(){
         return auftragsEnde;
     }

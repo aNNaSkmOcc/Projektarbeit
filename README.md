@@ -22,7 +22,7 @@ Dazu klickt man die Zelle an die verändert werden soll und klickt auf den Butto
 
 #### Arbeiter Löschen
 
-Wird ein Arbeiter gekündigt, kann er auch selbstverschtändlich aus der Datenbank Entfernt werden.
+Wird ein Arbeiter gekündigt, kann er auch selbstverschtändlich aus der Datenbank entfernt werden.
 
 ---
 
@@ -34,4 +34,6 @@ Das erstellen, löschen und bearbeiten von Bauaufträgen funktioniert vom Prinzi
 
 #### einen Arbeiter Zuweisen
 
-Nun, wenn wir Arbeiter
+Aaaaalso, wir haben jetzt zwar unsere Arbeiter und Bauaufträge. Jetzt können die Arbeiter ja nicht einfach so däumchen drehen... also Weisen wir denen mal ihre Jobs zu.
+
+Dazu klicken Sie den Arbeiter an den Sie zu einem Auftrag zuweisen möchten, und wählen dann den Bauauftrag aus, zu dem der ausgewählte Arbeiter hinzugefügt werden soll. Anschließend klicken Sie auf den Button "Arbeit Geben". Somit wurde dem Auftrag dann ein Arbeiter hinzugefügt.

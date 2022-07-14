@@ -331,7 +331,6 @@ public class FirmaGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
             }
         }
-        Bauauftrag.AuftragListeAusgeben();
     }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
 
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed

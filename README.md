@@ -32,8 +32,16 @@ Wird ein Arbeiter gekündigt, kann er auch selbstverschtändlich aus der Datenba
 
 Das erstellen, löschen und bearbeiten von Bauaufträgen funktioniert vom Prinzip her analog zu den Arbeitern
 
-#### einen Arbeiter Zuweisen
+#### einen Arbeiter zuweisen
 
-Aaaaalso, wir haben jetzt zwar unsere Arbeiter und Bauaufträge. Jetzt können die Arbeiter ja nicht einfach so däumchen drehen... also Weisen wir denen mal ihre Jobs zu.
+Also, wir haben jetzt zwar unsere Arbeiter und Bauaufträge. Jetzt können die Arbeiter ja nicht einfach so däumchen drehen... also Weisen wir denen mal ihre Jobs zu.
 
 Dazu klicken Sie den Arbeiter an den Sie zu einem Auftrag zuweisen möchten, und wählen dann den Bauauftrag aus, zu dem der ausgewählte Arbeiter hinzugefügt werden soll. Anschließend klicken Sie auf den Button "Arbeit Geben". Somit wurde dem Auftrag dann ein Arbeiter hinzugefügt.
+
+### einen Arbeiter entfernen
+Wenn wir jetzt einen Arbeiter von einer Arbeit zurückziehen möchten, gehen wir eigentlich Analog wie bei der zuweisung vor. Wir wählen einen Bauauftrag und einen Arbeiter aus und betätigen den button "Arbeit entziehen".
+Nun wäre der Arbeiter erfolgreich vom Job entzogen.
+
+### Zugewiesene Arbeiter einsehen
+Sicherlich möchten Sie auch wissen, welche Arbeiter an einem bestimmten Auftrag zugeteilt worden ist. Dazu klicken Sie den gewünschten Bauauftrag an und betätigen dann den Knopf "zugewiesene Arbetiter einsehen".
+Nun erscheint ein weiteres Fenster, worin Sie alle zum ausgewählten Auftrag zugewiesene Arbeiter einsehen.

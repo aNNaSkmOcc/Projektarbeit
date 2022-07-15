@@ -104,7 +104,7 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        arbeiterVonBauauftragLöschenButton.setText("Arbeit entfernen");
+        arbeiterVonBauauftragLöschenButton.setText("Arbeit entziehen");
         arbeiterVonBauauftragLöschenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 arbeiterVonBauauftragLöschenButtonActionPerformed(evt);

@@ -270,21 +270,24 @@ public class FirmaGUI extends JFrame {
             }
             ArbeiterTabelleAbÄndern(tableMitarbeiter);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Da ist irgendwas nicht richtig gewesen :DD");
+            JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
         };
 
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
 
     private void mitarbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterZuBauauftragActionPerformed
+        try{
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
             arbeiterKriegtJob(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
-
         }
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
         if (Arbeiter.mitArbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Arbeiter");
+        }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Sie müssen ein einen Mitarbeiter und ein Bauuaftrag auswählen");
         }
 
 
@@ -485,8 +488,8 @@ public class FirmaGUI extends JFrame {
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
                 int aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "Geben Sie die neue ID ein"));
                 for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
-                    if (Bauauftrag.bauAuftragListe.get(i).equals(aenderungZahl)) {
-                        JOptionPane.showInputDialog(null, "Dieser Bauauftrag exisitert schon :D");
+                    if (Bauauftrag.bauAuftragListe.get(i).getBauauftragsID() == aenderungZahl) {
+                        JOptionPane.showMessageDialog(null, "Dieser Bauauftrag exisitert schon :D");
                         return;
                     }
                 }
@@ -558,7 +561,7 @@ public class FirmaGUI extends JFrame {
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
 
-        JOptionPane.showConfirmDialog(null, "Arbeier erfolgreich hinzugefügt");
+        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
         System.out.println(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum()));
@@ -589,7 +592,7 @@ public class FirmaGUI extends JFrame {
             Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
             table1.setValueAt('✖', table1.getSelectedRow(), 5);
         }
-        JOptionPane.showConfirmDialog(null, "Arbeier erfolgreich entfernt");
+        JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
     }
 
 }

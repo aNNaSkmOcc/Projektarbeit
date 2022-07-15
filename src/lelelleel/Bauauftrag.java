@@ -44,7 +44,7 @@ public class Bauauftrag{
 
     public static void AuftragListeAusgeben() {
         if (bauAuftragListe.isEmpty()) {
-            System.out.println("Die Liste ist Leer du spasti :D");
+            System.out.println("Die Liste ist leer");
         }
         for (int j = 0; j < bauAuftragListe.size(); j++) {
             System.out.println("--------------------------");
@@ -72,7 +72,7 @@ public class Bauauftrag{
     public static void bauauftragEntfernen() {
         if (bauAuftragListe.isEmpty()) {
             System.out.println("--------------------------");
-            System.out.println("Die Liste ist Leer du spasti :D");
+            System.out.println("Die Liste ist leerD");
             System.out.println("--------------------------");
         } else {
 

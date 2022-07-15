@@ -46,7 +46,7 @@ public class Arbeiter {
     //Um alle Mitarbeiter auszugeben
     public static void arbeiterListeAusgeben() {
         if (mitArbeiterListe.isEmpty()) {
-            System.out.println("Die Liste ist Leer du spasti :D");
+            System.out.println("Die Liste ist leer");
         }
         
         for (int j = 0; j < mitArbeiterListe.size(); j++) {

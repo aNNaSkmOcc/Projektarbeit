@@ -64,7 +64,7 @@ public class Arbeiter {
     
     //-----------------------------------------
     //Um eine Stringeingabe zu einem Datum zu konvertieren
-    public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
+    public static LocalDate stringZuDatumKonvertieren(String datum) throws Exception{
        
     LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     
@@ -73,7 +73,7 @@ public class Arbeiter {
     //-----------------------------------------
 
     //-----------------------------------------
-
+    
 
     //-----------------------------------------
     //Konstruktor
@@ -152,12 +152,5 @@ public class Arbeiter {
         return auftragsEnde;
     }
     
-    public static String stringZuDatumKonvertieren(Date date) throws ParseException{
-        
-       String format = new SimpleDateFormat("dd.MM.yyyy").format(date);
-       
-        return format;
-    }
-
     //-----------------------------------------
 }

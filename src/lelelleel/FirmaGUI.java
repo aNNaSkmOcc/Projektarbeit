@@ -261,9 +261,10 @@ public class FirmaGUI extends JFrame {
         //Wenn Mitarbeiter existieren, führe die Methode "ArbeiterVonTabelleEntfernen()" aus.
         if (Arbeiter.mitArbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
-        } else {
-            ArbeiterVonTabelleEntfernen(tableMitarbeiter);
+            return;
         }
+        ArbeiterVonTabelleEntfernen(tableMitarbeiter);
+        JOptionPane.showMessageDialog(null, "Der Arbeiter wurde erfolgreich entfernt");
     }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
     //-----------------------------------------
     
@@ -272,15 +273,18 @@ public class FirmaGUI extends JFrame {
     //-----------------------------------------
     private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterÄndernButtonActionPerformed
         //Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
-        try {
+        try{
             //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
             if (Arbeiter.mitArbeiterListe.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
+                return;
             }
             ArbeiterTabelleAbÄndern(tableMitarbeiter);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Die Eingabe war wohl nicht ganz so korrekt");
-        };
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Sie müssen das Datum in dd-MM-yyyy eingeben");
+                return;
+            }
+        
 
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
     //-----------------------------------------
@@ -365,6 +369,7 @@ public class FirmaGUI extends JFrame {
     
     
     //Knopf um einen Bauauftrag zu entfernen
+    //-----------------------------------------
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
         if(Bauauftrag.bauAuftragListe.isEmpty()){
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
@@ -373,17 +378,28 @@ public class FirmaGUI extends JFrame {
         bauauftragVonTabelleEntfernen(tableMitarbeiter, tableBauaufträge);
         JOptionPane.showMessageDialog(null, "Bauauftrag erfolgreich entfernt.");
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
-
+    //-----------------------------------------
+    
+    //Knopf um einen Bauauftrag zu verändern
+    //-----------------------------------------
     private void bauAuftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragÄndernButtonActionPerformed
+        /*
+        Hier muss ein try-catch ausgeführt werden, falls man eines der Daten vom Typ "DateTime" verändert werden möchte
+        und diesen dann aber falsch eingibt.
+        */
         try {
             bauAuftragTabelleAbändern(tableBauaufträge);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ohh irgendwas wurde falsch eingegeben :DD");
             return;
         }
     }//GEN-LAST:event_bauAuftragÄndernButtonActionPerformed
-
+    //-----------------------------------------
+    
     private void zugewieseneArbeiterAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseneArbeiterAnzeigenActionPerformed
+        /*
+        Hier wird die GUI "zugewieseneMitArbeiter aufgerufen.
+        */
         new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
     }//GEN-LAST:event_zugewieseneArbeiterAnzeigenActionPerformed
 
@@ -409,14 +425,25 @@ public class FirmaGUI extends JFrame {
         FirmaGUI gui = new FirmaGUI();
     }
 
-    //Methoden für den Arbeiter
+    //Methode um Arbeiter in die Tabelle hinzuzufügen
     //----------------------------------------
-    Object[] row = new Object[6];
-
     public void ArbeiterZurTabelleHinzufügen() {
-
+        /*
+        Hier wird erstmal ein Array "row" vom Typ "Object" erstellt. Wir können ganz einfach ein Array nutzen,
+        weil die anzahl der Spalten bzw. Attribute fix ist und nicht noch vergrößert bzw.
+        verkleinert werden muss. Der Datentyp "Object" ist quasi ein Allrouder unter den
+        Datentypen. Der Vorteil ist, dass wir praktisch alles reinpacken können (int, String,Objekte etc.)
+        
+        Das DefaultTableModel, kann man sich vorstellen wie ein 2-Dimensionales Array. Der Vorteil dieser Klasse ist es,
+        dass man ganz einfach rows (zeilen) hinzufügen kann oder Zellen aufrufen kann. Um diesen zu erstellen, wird as model das die
+        Tabelle Standartgemäß hat, einfach auf das DefaultTableModel "getypecastet".
+        Wichtig ist noch zu wissen, dass es lediglich nur Tabelleneinträge sind. Leider wird allein durch das hinzufügen in die 
+        Tabelle, nicht per se ein Objekt erstellt.
+        */
+        Object[] row = new Object[6];
         DefaultTableModel model = (DefaultTableModel) tableMitarbeiter.getModel();
-
+        
+        //Hier wird jeder Mitarbeiter, in eine "schublade" des Arrays gestellt.
         for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
             row[0] = Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId();
             row[1] = Arbeiter.mitArbeiterListe.get(i).getName();
@@ -425,56 +452,94 @@ public class FirmaGUI extends JFrame {
             row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
             row[5] = Arbeiter.mitArbeiterListe.get(i).getHatAuftrag();
 
+            //Diese if-Abfrage hat einen esthetischen Grund, nämlich wenn ein Arbeiter komplett Arbeitslos ist, dann mach ein Kreuz als zeichen.
             if (Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false) {
                 row[5] = '✖';
             }
 
         }
-
+        /*
+        Diese Methode macht das entscheidende.... nämlich fügt sie die Tabelle als eine Hintereinanderreihung des Arrays 
+        in eine Zeile ein.
+        */
         model.addRow(row);
 
     }
-
+    //----------------------------------------
+    
+    
+    //Methode um einen Arbeiter, von der Tabelle zu entfernen
+    //----------------------------------------
     public void ArbeiterVonTabelleEntfernen(JTable table) {
-
+        /*
+        Auch hier wurde das DefaultTableModel benutzt, um Zeilen zu entfernen oder hinzuzufügen. Auch hier können wir das
+        Standartmodel vom JTable, als den DefaultTableModel Typecasten.
+        */
         DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
-        if (table.getSelectedRow() != -1) {                                                   // gucken ob die Zeile überhautpt elemente enthält
+        /*
+        mit der if-Abfrage, gucken wir ob die Zeile überhautpt elemente enthält. Wenn ein Element Leer ist, hat es im Jtable immer
+        den Wert -1. Wenn die Zeile nicht leer ist also nicht den Wert -1 hat, kann das System bedenkenlos die Folgenden Methoden
+        ausführen. Die Erste Methode entfern das Objekt, während die zweite Methode lediglich den Tabelleneintrag entfernt.
+        */
+        if (table.getSelectedRow() != -1) {                                                   
             Arbeiter.mitArbeiterListe.remove(table.getSelectedRow());
             model.removeRow(table.getSelectedRow());
         }
     }
-
-    public void ArbeiterTabelleAbÄndern(JTable table) throws Exception {        //das throws Exception mach ich, damit ich überhaupt den try-catch nutzen kann, denn die Methode wirft ggf einen Fehler der aufgefangen werden möchte :DD
+    //----------------------------------------
+    
+    //Methode um die Attribute der Arbeiter zu verändern.
+    //----------------------------------------
+    /*
+    Das throws Exception mach ich, damit ich überhaupt den try-catch nutzen kann. Außerdem signalisieren wir mit dem Stichtwort, 
+    "throws" dass es sein kann, dass das System ein Exception (plötzlich unerwarteter Fehler) rauswirft und abgefangen werden möchte.
+    */
+    public void ArbeiterTabelleAbÄndern(JTable table) throws Exception  {        
+        //Hier nutzen wir wieder das DefaultTableModel, aufgrund seiner bereits genannten Vorteile.
         DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
+        //Die if-Abfrage überprüft, ob die Zelle leer ist, die wie verändern möchten. 
         if (table.getSelectedRow() != -1) {
-            // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 
+            /*
+            Nun wollen wür überprüfen, um welche Spalte bzw. Attribut des Objekt es sich handelt. Dazu nutzen wir viele
+            if-Abfragen, die alle genau das überprüfen. Alternativ, hätte man die Überprüfung auch mithilfe eines "switch-case"
+            machen können. Trifft eines der if-Abfragen zu, dann erscheint ein Eingabefenster, wo wir das neue Attribut eingeben können.
+            Nach der Eingabe, wird der neue Eintrag sowohl in der Tabelle, als auch im Objekt verändert.
+            */
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
                 int aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "Geben Sie die neue ID ein?"));
+                //Hier wird überprüft, ob die MitarbeiterID, bereits vorhanden ist.
                 for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
                     if (Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId() == aenderungZahl) {
                         JOptionPane.showMessageDialog(null, "Diese MitarbeiterID existiert bereits");
                         return;
                     }   
                 }
+                /*
+                Diesen try-catch, müssen wir unbedingt machen, wenn wir die Exception auffangen wollen, die erscheint, wenn man keine
+                ganze Zahl eingibt
+                */
+                try{
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setMitarbeiterId(aenderungZahl);
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Sie müssen eine Zahl eingeben!");
+                }
             } else if (model.getColumnName(table.getSelectedColumn()) == "Name") {
-                String aenderungWort = JOptionPane.showInputDialog(null, "was wollen sie am Namen ändern?");
+                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie den neuen Namen ein");
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setName(aenderungWort);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Beruf") {
-                String aenderungWort = JOptionPane.showInputDialog(null, "was wollen sie am Beruf ändern?");
+                String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie den neuen Beruf ein");
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setBerufsBezeichnung(aenderungWort);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Jahresgehalt") {
-                double aenderungZahl = Double.parseDouble(JOptionPane.showInputDialog(null, "was wollen sie am Jahresgehalt ändern?"));
+                double aenderungZahl = Double.parseDouble(JOptionPane.showInputDialog(null, "Geben Sie das neue Gehalt ein"));
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
                 Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setJahresGehalt(aenderungZahl);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Einstellungsdatum") {
-                String aenderungWort = JOptionPane.showInputDialog(null, "was wollen sie am Einstellungsdatum ändern?");
-                model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setEinstellungsDatum(Arbeiter.stringZuDatumKonvertieren(aenderungWort));
-
+                String neuesDatum = JOptionPane.showInputDialog(null, "Geben Sie das neue Einstellungsdatum ein");
+                model.setValueAt(Arbeiter.stringZuDatumKonvertieren(neuesDatum), table.getSelectedRow(), table.getSelectedColumn());
+                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setEinstellungsDatum(Arbeiter.stringZuDatumKonvertieren(neuesDatum));
             }
            
         }
@@ -482,8 +547,16 @@ public class FirmaGUI extends JFrame {
     //----------------------------------------
 
     //Methoden für die Bauaufträge
+    
+    //Methode um den Bauauftrag, zur Tabelle hinzuzufügen
     //----------------------------------------
     public void bauauftragZurTabelleHinzufügen() {
+        /*
+        Hier ist das Prinzip eigentlich genau gleich wie bei der Methode "ArbeiterZurTabelleHinzufügen()".
+        Auch hier wird zunächst ein Array erstellt. Diesmal ist es größer, weil wir für die Klasse Bauauftrag,
+        auch mehr Attribute haben als bei der Klasse Arbeiter. Auch hier benutzen wir das DefaultTableModel, damit wir 
+        Zeilen bearbeiten und abfragen können.
+        */
         DefaultTableModel model = (DefaultTableModel) tableBauaufträge.getModel();
         Object[] row = new Object[7];
 
@@ -497,24 +570,47 @@ public class FirmaGUI extends JFrame {
             row[6] = Bauauftrag.bauAuftragListe.get(i).getEndDatum();
 
         }
-
+        
+        /*
+        Auch hier wird werden die Information über eine hintereinanderreihung der Elemente des Arraysin eine Zeile eingefügt.
+        */
         model.addRow(row);
 
     }
 
+    //Methode, um Bauauftrag von der Tabelle zu entfernen
     public void bauauftragVonTabelleEntfernen(JTable table1, JTable table2) {
+        //Hier benutzen wir für die methode addRow das DefaultTableModel.
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
+        //Mit der if-Abfrage überprüfen wir, ob die Reihe leer ist, denn man kann ja nicht nichts entfernen
         if (table2.getSelectedRow() != -1) {
+            /*
+            Diese Schleife, hat nur einen Esthetischen Aspekt. Wenn ein Bauauftrag entfernt wird, und fügt ein x bei der Spalte
+            "hatAuftrag" des Arbeiters, falls das der einzige Job war, den dieser Arbeiter hatte.
+            */
             for (int i = 0; i < Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().size(); i++) {
                 Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).setHatAuftrag(false);
                 table1.setValueAt('✖', i, 5);
+            }
+            /*
+            Diese for-Schleife ist schon etwas wichtiger. Hier ist das so, dass jeder Arbeiter, die Start und Enddaten der Bauaufträge zu denen 
+            er zugeteilt wird speichert. Diese for schleife, und die darin enthaltenen if-Abfragen sorgen dafür, dass die Daten dann entfernt werden,
+            und der Arbeiter dann diese Zeitspanne wieder frei hat.
+            */
+            for(int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size();k++){
+                if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()){
+                    Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(k);
+                }
+                if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()){
+                    Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(k);
+                }
             }
             Bauauftrag.bauAuftragListe.remove(table2.getSelectedRow());
             model.removeRow(table2.getSelectedRow());
         }
     }
 
-    public void bauAuftragTabelleAbändern(JTable table) throws ParseException {
+    public void bauAuftragTabelleAbändern(JTable table) throws Exception {
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
         if (table.getSelectedRow() != -1) {
             // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 

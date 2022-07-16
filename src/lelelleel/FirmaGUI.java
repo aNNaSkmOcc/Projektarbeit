@@ -18,9 +18,8 @@ import javax.swing.table.TableModel;
 
 public class FirmaGUI extends JFrame {
 
-    /**
-     * Creates new form FirmaGUI
-     */
+    
+    //* Das Hauptfenster der GUI wird erstellt
     public FirmaGUI() {
         initComponents();
         this.setContentPane(mainFrame);
@@ -46,9 +45,8 @@ public class FirmaGUI extends JFrame {
         arbeiterVonBauauftragLöschenButton = new javax.swing.JButton();
         bauAufträgeHinzufügenButton = new javax.swing.JButton();
         bauAuftragÄndernButton = new javax.swing.JButton();
-        bauAuftragEntfernenButton = new javax.swing.JButton();
         zugewieseneArbeiterAnzeigen = new javax.swing.JButton();
-        bauAuftragListeExportieren = new javax.swing.JButton();
+        bauAuftragEntfernenButton = new javax.swing.JButton();
 
         setTitle("A&C - GmbH & Co.KG");
         setLocation(new java.awt.Point(0, 0));
@@ -125,13 +123,6 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        bauAuftragEntfernenButton.setText("Bauauftrag entfernen");
-        bauAuftragEntfernenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bauAuftragEntfernenButtonActionPerformed(evt);
-            }
-        });
-
         zugewieseneArbeiterAnzeigen.setText("zugewiesene Arbeiter anzeigen");
         zugewieseneArbeiterAnzeigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,41 +130,47 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        bauAuftragListeExportieren.setText("Bauauftragsliste exportieren");
+        bauAuftragEntfernenButton.setText("Bauauftrag entfernen");
+        bauAuftragEntfernenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bauAuftragEntfernenButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainFrameLayout = new javax.swing.GroupLayout(mainFrame);
         mainFrame.setLayout(mainFrameLayout);
         mainFrameLayout.setHorizontalGroup(
             mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainFrameLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(arbeiterVonBauauftragLöschenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mitarbeiterZuBauauftrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(mitarbeiterHinzufügenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterÄndernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mitarbeiterEntfernenButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mitarbeiterEntfernenButton)
+                        .addGap(15, 15, 15))
+                    .addGroup(mainFrameLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainFrameLayout.createSequentialGroup()
+                                .addComponent(arbeiterVonBauauftragLöschenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 3, Short.MAX_VALUE))
+                            .addComponent(mitarbeiterZuBauauftrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(bauAufträgeHinzufügenButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bauAuftragÄndernButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bauAuftragListeExportieren))
-                    .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(zugewieseneArbeiterAnzeigen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bauAuftragEntfernenButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(mainFrameLayout.createSequentialGroup()
+                        .addComponent(bauAufträgeHinzufügenButton)
+                        .addGap(24, 24, 24)
+                        .addComponent(bauAuftragÄndernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         mainFrameLayout.setVerticalGroup(
             mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,8 +181,7 @@ public class FirmaGUI extends JFrame {
                     .addComponent(mitarbeiterEntfernenButton)
                     .addComponent(arbeiterÄndernButton)
                     .addComponent(bauAufträgeHinzufügenButton)
-                    .addComponent(bauAuftragÄndernButton)
-                    .addComponent(bauAuftragListeExportieren))
+                    .addComponent(bauAuftragÄndernButton))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
@@ -194,14 +190,14 @@ public class FirmaGUI extends JFrame {
                         .addComponent(arbeiterVonBauauftragLöschenButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(zugewieseneArbeiterAnzeigen)
                             .addComponent(bauAuftragEntfernenButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2))))
                 .addContainerGap())
         );
 
@@ -209,21 +205,20 @@ public class FirmaGUI extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainFrame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Knopf zur erstellung eines Mitarbeiters
+    //-----------------------------------------
     private void mitarbeiterHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterHinzufügenButtonActionPerformed
         String name = JOptionPane.showInputDialog(null, "Name? (Vorname - Nachname)");
-
+        
+        //Hier ein try-catch, damit dass wenn ein String eingegeben wird, das Programm nicht abschmiert
         int mitarbID = 0;
         try {
             mitarbID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
@@ -236,7 +231,8 @@ public class FirmaGUI extends JFrame {
         double jahresGehalt = Double.parseDouble(JOptionPane.showInputDialog(null, "Jahresgehalt?"));
         String einstelDat = JOptionPane.showInputDialog(null, "Einstellungsdatum?");
         boolean istVorhanden = false;
-
+        
+        //Hier wird nochmal überprüft, ob die MitarbeiterID bereits existiert oder nicht. Falls er bereits existiert, dann kriegt er den status "istVorhanden"
         for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
             if (Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId() == mitarbID) {
                 JOptionPane.showMessageDialog(null, "Diese MitarbeiterID existiert bereits!!");
@@ -244,7 +240,8 @@ public class FirmaGUI extends JFrame {
                 return;
             }
         }
-
+        //Wenn der Mitarbeiter nicht vorhanden ist, dann erstell einen Arbeiter und füge ihn zur Tabelle hinzu.
+        //Der try-catch sorgt dafür, dass die Eingabe des Datum vom Typ "DateTime" abgefangen werden kann :D
         if (istVorhanden == false) {
             try {
                 Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, jahresGehalt, Arbeiter.stringZuDatumKonvertieren(einstelDat));
@@ -254,29 +251,46 @@ public class FirmaGUI extends JFrame {
             }
         }
     }//GEN-LAST:event_mitarbeiterHinzufügenButtonActionPerformed
-
+    //-----------------------------------------
+    
+    
+    //Knopf zum entfernen des Arbeiters
+    //-----------------------------------------
     private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterEntfernenButtonActionPerformed
+        //Hier wird geschaut, ob es überhaupt Mitarbeiter gibt, denn wir können Mitarbeiter nicht entfernen die nicht existieren.
+        //Wenn Mitarbeiter existieren, führe die Methode "ArbeiterVonTabelleEntfernen()" aus.
         if (Arbeiter.mitArbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
         } else {
             ArbeiterVonTabelleEntfernen(tableMitarbeiter);
         }
     }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
-
+    //-----------------------------------------
+    
+    
+    //Knopf zum Abändern eines Arbeiters
+    //-----------------------------------------
     private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterÄndernButtonActionPerformed
+        //Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
         try {
+            //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
             if (Arbeiter.mitArbeiterListe.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
             }
             ArbeiterTabelleAbÄndern(tableMitarbeiter);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
+            JOptionPane.showMessageDialog(null, "Die Eingabe war wohl nicht ganz so korrekt");
         };
 
     }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
-
+    //-----------------------------------------
+    
+    //Knopf, um einen Arbeiter, zu einem Bauauftrag hinzuzufügen
+    //-----------------------------------------
     private void mitarbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterZuBauauftragActionPerformed
+        //Hier ein try-catch, weil das Programm eine Exception ausgibt, sobald man keinen Arbeiter und einen Bauauftrag auswählt
         try{
+        //Hier werden verschiedenste if-Abfragen gemacht, um die verschiedensten Fälle abzudecken.
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
             arbeiterKriegtJob(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
         }
@@ -292,8 +306,14 @@ public class FirmaGUI extends JFrame {
 
 
     }//GEN-LAST:event_mitarbeiterZuBauauftragActionPerformed
-
+    //-----------------------------------------
+    
+    
+    //Knopf um einen Arbeiter, von einem Bauauftrag zu entfernen
+    //-----------------------------------------
     private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
+        //Hier eine verschiedene if-Abfragen, um denn fall "Liste leer oder nicht" abzudecken. 
+        //Wenn nicht, dann führe die "arbeiterWirdArbeitslos()" Methode aus
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
@@ -301,10 +321,13 @@ public class FirmaGUI extends JFrame {
             arbeiterWirdArbeitslos(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
         }
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
-
+    //-----------------------------------------
+    
+    //Knopf um einen Bauauftrag hinzuzufügen
+    //-----------------------------------------
     private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAufträgeHinzufügenButtonActionPerformed
-
         int bauauftragID = 0;
+        //Hier wird ein try-catch gemacht, falls anstatt ein Integer, etwas anderes eingegeben wird.
         try {
             bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
         } catch (Exception e) {
@@ -319,13 +342,16 @@ public class FirmaGUI extends JFrame {
         String eingabeEndDatumm = (JOptionPane.showInputDialog(null, "Enddatum? (Bitte die Eingabe in dd(Tage) - mm(Monat in Zahl) - yyyy(Jahr))"));
 
         boolean istVorhanden = false;
-
+        
+        //Hier wird überprüft, ob die eingegebene ID bereits existiert. Denn wenn doch, dann erhält sie den Status "ist Vorhanden"
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
             if (Bauauftrag.bauAuftragListe.get(i).getBauauftragsID() == bauauftragID) {
                 JOptionPane.showMessageDialog(null, "Dieser BauauftragsID existiert bereits :DD");
                 istVorhanden = true;
             }
         }
+        //Falls der Status nicht "ist Vorhanden" ist, dann erstellt der ein Objekt und fügt ihn zur Tabelle hinzu.
+        //Ein try-catch wird für die Eingabe des Datums benötigt, falls man diese falsch eingibt.
         if (istVorhanden == false) {
             try {
                 Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, Bauauftrag.stringZuDatumKonvertieren(eingabeStartDatum), Bauauftrag.stringZuDatumKonvertieren(eingabeEndDatumm));
@@ -335,9 +361,17 @@ public class FirmaGUI extends JFrame {
             }
         }
     }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
-
+    //-----------------------------------------
+    
+    
+    //Knopf um einen Bauauftrag zu entfernen
     private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
+        if(Bauauftrag.bauAuftragListe.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
+            return;
+        }
         bauauftragVonTabelleEntfernen(tableMitarbeiter, tableBauaufträge);
+        JOptionPane.showMessageDialog(null, "Bauauftrag erfolgreich entfernt.");
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
 
     private void bauAuftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragÄndernButtonActionPerformed
@@ -358,7 +392,6 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
     private javax.swing.JButton arbeiterÄndernButton;
     private javax.swing.JButton bauAuftragEntfernenButton;
-    private javax.swing.JButton bauAuftragListeExportieren;
     private javax.swing.JButton bauAuftragÄndernButton;
     private javax.swing.JButton bauAufträgeHinzufügenButton;
     private javax.swing.JScrollPane jScrollPane1;

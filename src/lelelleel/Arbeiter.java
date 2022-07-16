@@ -17,7 +17,7 @@ public class Arbeiter {
     //Attribute
     //-----------------------------------------
     private String name;
-    private int mitarbeiterId;
+    private int mitarbeiterId;                  //Die zusätzliche Variable "MitarbeiterID" wurde eingeführt, um jeden Mitarbeiter einzigartig zu machen
     private String berufsBezeichnung;
     private LocalDate einstellungsDatum;
     private double jahresGehalt;

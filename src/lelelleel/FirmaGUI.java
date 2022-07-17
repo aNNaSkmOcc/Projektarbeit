@@ -687,31 +687,39 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
             return;
         }
-        
+        //checkt erstmal, ob ein Bauauftrag ausgewählt wurde
         if (!table2.isRowSelected(table2.getSelectedRow())) {
             JOptionPane.showMessageDialog(null, "Sie müssen noch ein Bauauftrag auswählen.");
             return;
         }
         
+        /*
+        Diese if-Abfrage dient dazu, dass wenn ein Arbeiter zu einem Job eingetragen wird, wo es ihn nichtmal gab eine Fehlermeldung
+        kommt und der Arbeiter dann selbstverständlich nicht eingetragen wird.
+        */
         if (Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum())) {
                 JOptionPane.showMessageDialog(null, "Der Arbeiter war zu diesem Zeitpunkt noch nicht eingestellt :DD");
                 return;
         }
         
+        /*
+        Diese for-schleife ist Essenziell für diese Methode. Sie blockt den Arbeiter für einen bestimmten Zeitraum, damit er 
+        in diesem Zeitraum nicht für andere Bauaufträge eingetragen werden kann.
+        Außerdem wird nochmal geguckt, ob er nicht schon bereits in diesem Auftrag zugeteilt wurde.
+        Wenn wir jetzt den Fall haben, dass der Arbeiter für einen bestimmten Auftrag geblockt ist,weil er zu diesem Zeitpunkt beschäfrigt ist,
+        dann schaltet sich die variable "beschäftigt" auf "true" und die folgende if-Abfrage fällt negativ aus.
+        */
         
         for (int k = 0; k < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
-            
             if(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(k) == Arbeiter.arbeiterListe.get(table1.getSelectedRow())){
                JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter, ist bereits in diesem Bauauftrag.");
                return;
             }
-            
             if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
                 JOptionPane.showMessageDialog(null, "Der Arbeiter ist zu diesem Zeitpunkt beschäftigt");
                 beschäftigt = true;
                 return;
             }
-        
         }
         if(beschäftigt == false){
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);

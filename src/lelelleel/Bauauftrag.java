@@ -26,6 +26,7 @@ public class Bauauftrag{
 
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     static LinkedList<Bauauftrag> bauAuftragListe = new LinkedList<Bauauftrag>();
+    //Hier in dieser Liste, werden die zugewiesenen Arbeiter gespeichert.
     LinkedList<Arbeiter> bauAuftragMitArbeiter;
 
 
@@ -41,7 +42,7 @@ public class Bauauftrag{
         return b1;
     }
 
-
+    //Methode um alle Bauaufträge in der Systemausgabe auszugeben
     public static void AuftragListeAusgeben() {
         if (bauAuftragListe.isEmpty()) {
             System.out.println("Die Liste ist leer");
@@ -69,6 +70,7 @@ public class Bauauftrag{
     }
 
 
+    //Um aufträge zu entfernen
     public static void bauauftragEntfernen() {
         if (bauAuftragListe.isEmpty()) {
             System.out.println("--------------------------");
@@ -91,7 +93,11 @@ public class Bauauftrag{
             }
         }
     }
-    
+
+    /*
+    Diese Methode findet man sowohl bei der Klasse Arbeiter, als auch bei der Klasse Bauauftrag. Sie ist essenziell,
+    weil sie Bauauftröge
+     */
     public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
        
        LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));

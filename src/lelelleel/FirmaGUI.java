@@ -738,7 +738,7 @@ public class FirmaGUI extends JFrame {
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
 
-        //Nun folgen ein paar optische dinger, wie z.B dass eine Bestätigung erscheint, oder
+        //Nun folgen ein paar optische dinger, wie z.B dass eine Bestätigung erscheint, oder der Mitarbeiter dann einen haken bekommt.
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
@@ -747,27 +747,40 @@ public class FirmaGUI extends JFrame {
     }
     //----------------------------------------
     
-    
+
+    //Methode , um Arbeiter von einem Bauauftrag zu entziehen
     public void arbeiterWirdArbeitslos(JTable table1, JTable table2, Arbeiter a1) {
+        /*
+        Ähnlich wie bei der Methode "arbeiterKriegtJob()", wird auch hier mit beiden Tabellen gleichzeitig gearbeitet.
+         */
+        //Hier checken wir erstmal ab, ob wir überhaupt Bauaufträge haben
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
             return;
-        } //checkt erstmal, ob wir überhaupt bauaufträge haben :D
+        }
 
+        //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
         if (!table1.isRowSelected(table1.getSelectedRow())) {
             JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
             return;
-        } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
+        }
 
-        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
+        //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
+        if (!table2.isRowSelected(table2.getSelectedRow())) {
+            JOptionPane.showMessageDialog(null, "Sie müssen noch einen Bauauftrag auswählen");
+            return;
+        }
 
+        //Hier wird die blockierung entfernt, die der Arbeiter in seinem Terminkalender für diesen Auftrag hat.
         for (int i = 0; i < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); i++) {
             if (Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(i).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
                 Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(i);
                 Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(i);
             }
         }
-
+        //Hier wird der das Objekt Bauauftrag von System gelöscht
+        Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
+        //Der Mitarbeiter bekommt in der Tabelle dank dieser if-Abfrage ein "x", falls er komplett keine Aufgabe hat.
         if (Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().isEmpty()) {
             Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
             table1.setValueAt('✖', table1.getSelectedRow(), 5);

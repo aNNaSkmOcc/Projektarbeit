@@ -2,20 +2,22 @@
 package lelelleel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author enesates
- */
+
 public class zugewieseneMitArbeiter extends JFrame {
     
     public zugewieseneMitArbeiter(JTable table)   {       //Erstellt das GUIFenster mit dem Titel Baufirma
         
     
-        
+        //Diese if-Abfrage sorgt dafür, dass eine Fehlermeldung erscheint, falls kein Bauauftrag ausgewählt wurde.
         if(!table.isRowSelected(table.getSelectedRow())){
             JOptionPane.showMessageDialog(null, "Sie müssen einen Bauauftrag auswählen");
             return;
         }
+        /*
+        Weil die GUI, mit einem Builder gebaut wurde, wurden alle Eigenschaften die in dem Builder eingestellt wurden,
+        in eine Methode "initComponents()" gespeichert. Diese Methode wird auch als erstes aufgerufen. Anschließend
+        kommen weitere Eigenschaften
+         */
         initComponents();
         this.setContentPane(jPanel1);                           
         this.setVisible(true);                                  //sorgt dafür, dass wir das Fenster überhaupt sehenn
@@ -71,12 +73,17 @@ public class zugewieseneMitArbeiter extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
+    /*
+    Diese Methode kennen wir bereits aus der Klasse FirmaGUI. Da wir die Mitarbeiter, die dem Bauauftrag hinzugefügt wurden über
+    eine Tabelle anziegen wollen, haben wir praktisch die selbe Tabelle, wie in der HauptGUI, die vom Prinzip her auch genau analog
+    Funktioniert.
+     */
     public void ArbeiterZurTabelleHinzufügen(JTable table2) {
         
 

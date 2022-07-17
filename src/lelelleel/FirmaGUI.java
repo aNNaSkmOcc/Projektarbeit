@@ -256,7 +256,7 @@ public class FirmaGUI extends JFrame {
     
     //Knopf zum entfernen des Arbeiters
     //-----------------------------------------
-    private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterEntfernenButtonActionPerformed
+    private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt){
         //Hier wird geschaut, ob es überhaupt Mitarbeiter gibt, denn wir können Mitarbeiter nicht entfernen die nicht existieren.
         //Wenn Mitarbeiter existieren, führe die Methode "ArbeiterVonTabelleEntfernen()" aus.
         if (Arbeiter.arbeiterListe.isEmpty()) {
@@ -265,13 +265,13 @@ public class FirmaGUI extends JFrame {
         }
         ArbeiterVonTabelleEntfernen(tableArbeiter);
         JOptionPane.showMessageDialog(null, "Der Arbeiter wurde erfolgreich entfernt");
-    }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
+    }
     //-----------------------------------------
     
     
     //Knopf zum Abändern eines Arbeiters
     //-----------------------------------------
-    private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterÄndernButtonActionPerformed
+    private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
         try{
             //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
@@ -291,7 +291,7 @@ public class FirmaGUI extends JFrame {
     
     //Knopf, um einen Arbeiter, zu einem Bauauftrag hinzuzufügen
     //-----------------------------------------
-    private void arbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterZuBauauftragActionPerformed
+    private void arbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {
         //Hier ein try-catch, weil das Programm eine Exception ausgibt, sobald man keinen Arbeiter und einen Bauauftrag auswählt
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
@@ -312,7 +312,7 @@ public class FirmaGUI extends JFrame {
     
     //Knopf um einen Arbeiter, von einem Bauauftrag zu entfernen
     //-----------------------------------------
-    private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
+    private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //Hier eine verschiedene if-Abfragen, um denn fall "Liste leer oder nicht" abzudecken. 
         //Wenn nicht, dann führe die "arbeiterWirdArbeitslos()" Methode aus
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
@@ -321,12 +321,12 @@ public class FirmaGUI extends JFrame {
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
             arbeiterWirdArbeitslos(tableArbeiter, tableBauaufträge, Arbeiter.arbeiterListe.get(tableArbeiter.getSelectedRow()));
         }
-    }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
+    }//
     //-----------------------------------------
     
     //Knopf um einen Bauauftrag hinzuzufügen
     //-----------------------------------------
-    private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAufträgeHinzufügenButtonActionPerformed
+    private void bauAufträgeHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int bauauftragID = 0;
         //Hier wird ein try-catch gemacht, falls anstatt ein Integer, etwas anderes eingegeben wird.
         try {
@@ -393,30 +393,30 @@ public class FirmaGUI extends JFrame {
     }//GEN-LAST:event_bauAuftragÄndernButtonActionPerformed
     //-----------------------------------------
     
-    private void zugewieseneArbeiterAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zugewieseneArbeiterAnzeigenActionPerformed
+    private void zugewieseneArbeiterAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {
         /*
         Hier wird die GUI "zugewieseneMitArbeiter aufgerufen.
         */
         new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
-    }//GEN-LAST:event_zugewieseneArbeiterAnzeigenActionPerformed
+    }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
-    private javax.swing.JButton arbeiterZuBauauftrag;
-    private javax.swing.JButton arbeiterÄndernButton;
-    private javax.swing.JButton bauAuftragEntfernenButton;
-    private javax.swing.JButton bauAuftragÄndernButton;
-    private javax.swing.JButton bauAufträgeHinzufügenButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel mainFrame;
-    private javax.swing.JButton mitarbeiterEntfernenButton;
-    private javax.swing.JButton mitarbeiterHinzufügenButton;
-    private javax.swing.JTable tableArbeiter;
-    private javax.swing.JTable tableBauaufträge;
-    private javax.swing.JButton zugewieseneArbeiterAnzeigen;
-    // End of variables declaration//GEN-END:variables
+    // Variablen :D
+        private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
+        private javax.swing.JButton arbeiterZuBauauftrag;
+        private javax.swing.JButton arbeiterÄndernButton;
+        private javax.swing.JButton bauAuftragEntfernenButton;
+        private javax.swing.JButton bauAuftragÄndernButton;
+        private javax.swing.JButton bauAufträgeHinzufügenButton;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JScrollPane jScrollPane2;
+        private javax.swing.JPanel mainFrame;
+        private javax.swing.JButton mitarbeiterEntfernenButton;
+        private javax.swing.JButton mitarbeiterHinzufügenButton;
+        private javax.swing.JTable tableArbeiter;
+        private javax.swing.JTable tableBauaufträge;
+        private javax.swing.JButton zugewieseneArbeiterAnzeigen;
+        // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
         FirmaGUI gui = new FirmaGUI();
@@ -721,6 +721,13 @@ public class FirmaGUI extends JFrame {
                 return;
             }
         }
+        /*
+        Falls aber jetzt der die if-Abfrage davor(Z.718) negativ ausfallen sollte, dann wird aber jetzt die folgende if-Abfrage positiv
+        ausfallen.
+
+        Zunächst mal, sollte erklärt werden, wie überhaupt die Mitarbeiter in die Bauaufträge gespeichert werden.
+        Jedes Bauauftragobjekt, besitzt eine Liste mit den Bauaufträgen drin.
+        */
         if(beschäftigt == false){
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
 

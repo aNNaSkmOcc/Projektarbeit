@@ -36,12 +36,12 @@ public class FirmaGUI extends JFrame {
         mainFrame = new javax.swing.JPanel();
         mitarbeiterHinzufügenButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableMitarbeiter = new javax.swing.JTable();
+        tableArbeiter = new javax.swing.JTable();
         mitarbeiterEntfernenButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBauaufträge = new javax.swing.JTable();
         arbeiterÄndernButton = new javax.swing.JButton();
-        mitarbeiterZuBauauftrag = new javax.swing.JButton();
+        arbeiterZuBauauftrag = new javax.swing.JButton();
         arbeiterVonBauauftragLöschenButton = new javax.swing.JButton();
         bauAufträgeHinzufügenButton = new javax.swing.JButton();
         bauAuftragÄndernButton = new javax.swing.JButton();
@@ -61,7 +61,7 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        tableMitarbeiter.setModel(new javax.swing.table.DefaultTableModel(
+        tableArbeiter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -69,7 +69,7 @@ public class FirmaGUI extends JFrame {
                 "ID", "Name", "Beruf", "Jahresgehalt", "Einstellungsdatum", "hat Job"
             }
         ));
-        jScrollPane1.setViewportView(tableMitarbeiter);
+        jScrollPane1.setViewportView(tableArbeiter);
 
         mitarbeiterEntfernenButton.setText("Arbeiter entfernen");
         mitarbeiterEntfernenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,10 +95,10 @@ public class FirmaGUI extends JFrame {
             }
         });
 
-        mitarbeiterZuBauauftrag.setText("Arbeit geben");
-        mitarbeiterZuBauauftrag.addActionListener(new java.awt.event.ActionListener() {
+        arbeiterZuBauauftrag.setText("Arbeit geben");
+        arbeiterZuBauauftrag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitarbeiterZuBauauftragActionPerformed(evt);
+                arbeiterZuBauauftragActionPerformed(evt);
             }
         });
 
@@ -158,7 +158,7 @@ public class FirmaGUI extends JFrame {
                             .addGroup(mainFrameLayout.createSequentialGroup()
                                 .addComponent(arbeiterVonBauauftragLöschenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 3, Short.MAX_VALUE))
-                            .addComponent(mitarbeiterZuBauauftrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(arbeiterZuBauauftrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
@@ -185,7 +185,7 @@ public class FirmaGUI extends JFrame {
                 .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addComponent(mitarbeiterZuBauauftrag)
+                        .addComponent(arbeiterZuBauauftrag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arbeiterVonBauauftragLöschenButton)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -233,8 +233,8 @@ public class FirmaGUI extends JFrame {
         boolean istVorhanden = false;
         
         //Hier wird nochmal überprüft, ob die MitarbeiterID bereits existiert oder nicht. Falls er bereits existiert, dann kriegt er den status "istVorhanden"
-        for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
-            if (Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId() == mitarbID) {
+        for (int i = 0; i < Arbeiter.arbeiterListe.size(); i++) {
+            if (Arbeiter.arbeiterListe.get(i).getArbeiterID() == mitarbID) {
                 JOptionPane.showMessageDialog(null, "Diese MitarbeiterID existiert bereits!!");
                 istVorhanden = true;
                 return;
@@ -259,11 +259,11 @@ public class FirmaGUI extends JFrame {
     private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterEntfernenButtonActionPerformed
         //Hier wird geschaut, ob es überhaupt Mitarbeiter gibt, denn wir können Mitarbeiter nicht entfernen die nicht existieren.
         //Wenn Mitarbeiter existieren, führe die Methode "ArbeiterVonTabelleEntfernen()" aus.
-        if (Arbeiter.mitArbeiterListe.isEmpty()) {
+        if (Arbeiter.arbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
             return;
         }
-        ArbeiterVonTabelleEntfernen(tableMitarbeiter);
+        ArbeiterVonTabelleEntfernen(tableArbeiter);
         JOptionPane.showMessageDialog(null, "Der Arbeiter wurde erfolgreich entfernt");
     }//GEN-LAST:event_mitarbeiterEntfernenButtonActionPerformed
     //-----------------------------------------
@@ -275,13 +275,13 @@ public class FirmaGUI extends JFrame {
         //Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
         try{
             //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
-            if (Arbeiter.mitArbeiterListe.isEmpty()) {
+            if (Arbeiter.arbeiterListe.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
                 return;
             }
-            ArbeiterTabelleAbÄndern(tableMitarbeiter);
+            arbeiterTabelleAbÄndern(tableArbeiter);
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Sie müssen das Datum in dd-MM-yyyy eingeben");
+                JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten");
                 return;
             }
         
@@ -291,25 +291,22 @@ public class FirmaGUI extends JFrame {
     
     //Knopf, um einen Arbeiter, zu einem Bauauftrag hinzuzufügen
     //-----------------------------------------
-    private void mitarbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterZuBauauftragActionPerformed
+    private void arbeiterZuBauauftragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbeiterZuBauauftragActionPerformed
         //Hier ein try-catch, weil das Programm eine Exception ausgibt, sobald man keinen Arbeiter und einen Bauauftrag auswählt
-        try{
-        //Hier werden verschiedenste if-Abfragen gemacht, um die verschiedensten Fälle abzudecken.
-        if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterKriegtJob(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
-        }
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
-        if (Arbeiter.mitArbeiterListe.isEmpty()) {
+        if (Arbeiter.arbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Arbeiter");
         }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Sie müssen ein einen Mitarbeiter und ein Bauuaftrag auswählen");
+        //Hier werden verschiedenste if-Abfragen gemacht, um die verschiedensten Fälle abzudecken.
+        if (!Bauauftrag.bauAuftragListe.isEmpty()) {
+            arbeiterKriegtJob(tableArbeiter, tableBauaufträge, Arbeiter.arbeiterListe.get(tableArbeiter.getSelectedRow()));
         }
+        
 
 
-    }//GEN-LAST:event_mitarbeiterZuBauauftragActionPerformed
+    }//GEN-LAST:event_arbeiterZuBauauftragActionPerformed
     //-----------------------------------------
     
     
@@ -322,7 +319,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterWirdArbeitslos(tableMitarbeiter, tableBauaufträge, Arbeiter.mitArbeiterListe.get(tableMitarbeiter.getSelectedRow()));
+            arbeiterWirdArbeitslos(tableArbeiter, tableBauaufträge, Arbeiter.arbeiterListe.get(tableArbeiter.getSelectedRow()));
         }
     }//GEN-LAST:event_arbeiterVonBauauftragLöschenButtonActionPerformed
     //-----------------------------------------
@@ -375,7 +372,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
             return;
         }
-        bauauftragVonTabelleEntfernen(tableMitarbeiter, tableBauaufträge);
+        bauauftragVonTabelleEntfernen(tableArbeiter, tableBauaufträge);
         JOptionPane.showMessageDialog(null, "Bauauftrag erfolgreich entfernt.");
     }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
     //-----------------------------------------
@@ -390,7 +387,7 @@ public class FirmaGUI extends JFrame {
         try {
             bauAuftragTabelleAbändern(tableBauaufträge);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ohh irgendwas wurde falsch eingegeben :DD");
+            JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten");
             return;
         }
     }//GEN-LAST:event_bauAuftragÄndernButtonActionPerformed
@@ -406,6 +403,7 @@ public class FirmaGUI extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
+    private javax.swing.JButton arbeiterZuBauauftrag;
     private javax.swing.JButton arbeiterÄndernButton;
     private javax.swing.JButton bauAuftragEntfernenButton;
     private javax.swing.JButton bauAuftragÄndernButton;
@@ -415,9 +413,8 @@ public class FirmaGUI extends JFrame {
     private javax.swing.JPanel mainFrame;
     private javax.swing.JButton mitarbeiterEntfernenButton;
     private javax.swing.JButton mitarbeiterHinzufügenButton;
-    private javax.swing.JButton mitarbeiterZuBauauftrag;
+    private javax.swing.JTable tableArbeiter;
     private javax.swing.JTable tableBauaufträge;
-    private javax.swing.JTable tableMitarbeiter;
     private javax.swing.JButton zugewieseneArbeiterAnzeigen;
     // End of variables declaration//GEN-END:variables
 
@@ -441,19 +438,19 @@ public class FirmaGUI extends JFrame {
         Tabelle, nicht per se ein Objekt erstellt.
         */
         Object[] row = new Object[6];
-        DefaultTableModel model = (DefaultTableModel) tableMitarbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableArbeiter.getModel();
         
         //Hier wird jeder Mitarbeiter, in eine "schublade" des Arrays gestellt.
-        for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
-            row[0] = Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId();
-            row[1] = Arbeiter.mitArbeiterListe.get(i).getName();
-            row[2] = Arbeiter.mitArbeiterListe.get(i).getBerufsBezeichnung();
-            row[4] = Arbeiter.mitArbeiterListe.get(i).getEinstellungsDatum();
-            row[3] = Arbeiter.mitArbeiterListe.get(i).getJahresGehalt();
-            row[5] = Arbeiter.mitArbeiterListe.get(i).getHatAuftrag();
+        for (int i = 0; i < Arbeiter.arbeiterListe.size(); i++) {
+            row[0] = Arbeiter.arbeiterListe.get(i).getArbeiterID();
+            row[1] = Arbeiter.arbeiterListe.get(i).getName();
+            row[2] = Arbeiter.arbeiterListe.get(i).getBerufsBezeichnung();
+            row[4] = Arbeiter.arbeiterListe.get(i).getEinstellungsDatum();
+            row[3] = Arbeiter.arbeiterListe.get(i).getJahresGehalt();
+            row[5] = Arbeiter.arbeiterListe.get(i).getHatAuftrag();
 
             //Diese if-Abfrage hat einen esthetischen Grund, nämlich wenn ein Arbeiter komplett Arbeitslos ist, dann mach ein Kreuz als zeichen.
-            if (Arbeiter.mitArbeiterListe.get(i).getHatAuftrag() == false) {
+            if (Arbeiter.arbeiterListe.get(i).getHatAuftrag() == false) {
                 row[5] = '✖';
             }
 
@@ -463,6 +460,7 @@ public class FirmaGUI extends JFrame {
         in eine Zeile ein.
         */
         model.addRow(row);
+        
 
     }
     //----------------------------------------
@@ -475,14 +473,14 @@ public class FirmaGUI extends JFrame {
         Auch hier wurde das DefaultTableModel benutzt, um Zeilen zu entfernen oder hinzuzufügen. Auch hier können wir das
         Standartmodel vom JTable, als den DefaultTableModel Typecasten.
         */
-        DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableArbeiter.getModel();
         /*
         mit der if-Abfrage, gucken wir ob die Zeile überhautpt elemente enthält. Wenn ein Element Leer ist, hat es im Jtable immer
         den Wert -1. Wenn die Zeile nicht leer ist also nicht den Wert -1 hat, kann das System bedenkenlos die Folgenden Methoden
         ausführen. Die Erste Methode entfern das Objekt, während die zweite Methode lediglich den Tabelleneintrag entfernt.
         */
         if (table.getSelectedRow() != -1) {                                                   
-            Arbeiter.mitArbeiterListe.remove(table.getSelectedRow());
+            Arbeiter.arbeiterListe.remove(table.getSelectedRow());
             model.removeRow(table.getSelectedRow());
         }
     }
@@ -490,13 +488,13 @@ public class FirmaGUI extends JFrame {
     
     //Methode um die Attribute der Arbeiter zu verändern.
     //----------------------------------------
-    /*
-    Das throws Exception mach ich, damit ich überhaupt den try-catch nutzen kann. Außerdem signalisieren wir mit dem Stichtwort, 
-    "throws" dass es sein kann, dass das System ein Exception (plötzlich unerwarteter Fehler) rauswirft und abgefangen werden möchte.
-    */
-    public void ArbeiterTabelleAbÄndern(JTable table) throws Exception  {        
+    public void arbeiterTabelleAbÄndern(JTable table) throws Exception  { 
+        /*
+        Das throws Exception mach ich, damit ich überhaupt den try-catch nutzen kann. Außerdem signalisieren wir mit dem Stichtwort, 
+        "throws" dass es sein kann, dass das System ein Exception (plötzlich unerwarteter Fehler) rauswirft und abgefangen werden möchte.
+        */
         //Hier nutzen wir wieder das DefaultTableModel, aufgrund seiner bereits genannten Vorteile.
-        DefaultTableModel model = (DefaultTableModel) this.tableMitarbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tableArbeiter.getModel();
         //Die if-Abfrage überprüft, ob die Zelle leer ist, die wie verändern möchten. 
         if (table.getSelectedRow() != -1) {
             /*
@@ -507,10 +505,10 @@ public class FirmaGUI extends JFrame {
             */
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
                 int aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "Geben Sie die neue ID ein?"));
-                //Hier wird überprüft, ob die MitarbeiterID, bereits vorhanden ist.
-                for (int i = 0; i < Arbeiter.mitArbeiterListe.size(); i++) {
-                    if (Arbeiter.mitArbeiterListe.get(i).getMitarbeiterId() == aenderungZahl) {
-                        JOptionPane.showMessageDialog(null, "Diese MitarbeiterID existiert bereits");
+                //Hier wird überprüft, ob die ArbeiterID, bereits vorhanden ist.
+                for (int i = 0; i < Arbeiter.arbeiterListe.size(); i++) {
+                    if (Arbeiter.arbeiterListe.get(i).getArbeiterID() == aenderungZahl) {
+                        JOptionPane.showMessageDialog(null, "Diese ArbeiterID existiert bereits");
                         return;
                     }   
                 }
@@ -518,28 +516,24 @@ public class FirmaGUI extends JFrame {
                 Diesen try-catch, müssen wir unbedingt machen, wenn wir die Exception auffangen wollen, die erscheint, wenn man keine
                 ganze Zahl eingibt
                 */
-                try{
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setMitarbeiterId(aenderungZahl);
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null, "Sie müssen eine Zahl eingeben!");
-                }
+                Arbeiter.arbeiterListe.get(table.getSelectedRow()).setArbeiterID(aenderungZahl);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Name") {
                 String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie den neuen Namen ein");
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setName(aenderungWort);
+                Arbeiter.arbeiterListe.get(table.getSelectedRow()).setName(aenderungWort);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Beruf") {
                 String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie den neuen Beruf ein");
                 model.setValueAt(aenderungWort, table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setBerufsBezeichnung(aenderungWort);
+                Arbeiter.arbeiterListe.get(table.getSelectedRow()).setBerufsBezeichnung(aenderungWort);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Jahresgehalt") {
                 double aenderungZahl = Double.parseDouble(JOptionPane.showInputDialog(null, "Geben Sie das neue Gehalt ein"));
                 model.setValueAt(aenderungZahl, table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setJahresGehalt(aenderungZahl);
+                Arbeiter.arbeiterListe.get(table.getSelectedRow()).setJahresGehalt(aenderungZahl);
             } else if (model.getColumnName(table.getSelectedColumn()) == "Einstellungsdatum") {
                 String neuesDatum = JOptionPane.showInputDialog(null, "Geben Sie das neue Einstellungsdatum ein");
                 model.setValueAt(Arbeiter.stringZuDatumKonvertieren(neuesDatum), table.getSelectedRow(), table.getSelectedColumn());
-                Arbeiter.mitArbeiterListe.get(table.getSelectedRow()).setEinstellungsDatum(Arbeiter.stringZuDatumKonvertieren(neuesDatum));
+                Arbeiter.arbeiterListe.get(table.getSelectedRow()).setEinstellungsDatum(Arbeiter.stringZuDatumKonvertieren(neuesDatum));
             }
            
         }
@@ -572,13 +566,14 @@ public class FirmaGUI extends JFrame {
         }
         
         /*
-        Auch hier wird werden die Information über eine hintereinanderreihung der Elemente des Arraysin eine Zeile eingefügt.
+        Auch hier wird werden die Information mittels einer hintereinanderreihung der Elemente des Arrays in eine Zeile eingefügt.
         */
         model.addRow(row);
 
     }
 
     //Methode, um Bauauftrag von der Tabelle zu entfernen
+    //----------------------------------------
     public void bauauftragVonTabelleEntfernen(JTable table1, JTable table2) {
         //Hier benutzen wir für die methode addRow das DefaultTableModel.
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
@@ -597,23 +592,39 @@ public class FirmaGUI extends JFrame {
             er zugeteilt wird speichert. Diese for schleife, und die darin enthaltenen if-Abfragen sorgen dafür, dass die Daten dann entfernt werden,
             und der Arbeiter dann diese Zeitspanne wieder frei hat.
             */
-            for(int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size();k++){
-                if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()){
-                    Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(k);
+            if(!Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().isEmpty())
+            for (int k = 0; k < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size();k++){
+                if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()){
+                    Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(k);
                 }
-                if(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()){
-                    Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(k);
+                if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k) == Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()){
+                    Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(k);
                 }
             }
+            
+            /*
+            Haben wir die Termine vom arbeiter entfernt, entfernen wir nun das Objekt, und den Tabelleneintrag.
+            */
             Bauauftrag.bauAuftragListe.remove(table2.getSelectedRow());
             model.removeRow(table2.getSelectedRow());
+            System.out.println(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin());
+            System.out.println(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde());
+            
         }
     }
-
+    //----------------------------------------
+    
+    //Methode, um Bauaufträge von der
+    //----------------------------------------
     public void bauAuftragTabelleAbändern(JTable table) throws Exception {
+        /*
+        Hier Funktioniert das Prinzip analog zu der Methode "ArbeiterTabelleAbändern()". 
+        */
         DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
         if (table.getSelectedRow() != -1) {
-            // gucken ob die Zeile überhautpt elemente enthält                    //Entfernt das 
+            /*
+            Auch hier klappern wir viele Fälle ab um zu überprüfen, welches Attribut wir jetzt verändern müssen.
+            */
             if (model.getColumnName(table.getSelectedColumn()) == "ID") {
                 int aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "Geben Sie die neue ID ein"));
                 for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
@@ -656,47 +667,67 @@ public class FirmaGUI extends JFrame {
             }
         }
     }
-
+    //----------------------------------------
+    
+    //Methode, um Arbeiter zu einem Bauauftrag zuzuweisen.
     //----------------------------------------
     public void arbeiterKriegtJob(JTable table1, JTable table2, Arbeiter a1) {
-        if (Bauauftrag.bauAuftragListe.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
+        /*
+        Hier geben wir diesmal 2 Tabellen, als Parameter an. Anstelle von table1 übergeben wir dann die Tabelle von den Mitarbeitern.
+        Anstelle von table2, übergeben wir dann die Tabelle der Bauaufträge.
+        */
+        //Diese Variable kann man sich wie ein Hebel vorstellen der aktiv werden muss, damit das System den Arbeiter zuweisen kann.
+        boolean beschäftigt = false;
+        if (Bauauftrag.bauAuftragListe.isEmpty() && Arbeiter.arbeiterListe.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge und keine Arbeiter");
             return;
-        } //checkt erstmal, ob wir überhaupt Mitarbeiter haben :D
+        }
+        //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
         if (!table1.isRowSelected(table1.getSelectedRow())) {
             JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
             return;
-        } //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
-
-        for (int k = 0; k < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
-
-            if (Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum()) == true) {
-                JOptionPane.showMessageDialog(null, "Der Arbeiter wurde zu diesem Zeitpunkt noch nicht eingestellt :DD");
-                return;
-            }
-
-            if (!Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()) == true) {
-                JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
-                return;
-            }
-            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum()) == true) {
-                JOptionPane.showMessageDialog(null, "Zu diesem Zeitraum ist der Arbeiter bereits beschäftigt :DD");
-                return;
-            }
-
         }
+        
+        if (!table2.isRowSelected(table2.getSelectedRow())) {
+            JOptionPane.showMessageDialog(null, "Sie müssen noch ein Bauauftrag auswählen.");
+            return;
+        }
+        
+        if (Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum())) {
+                JOptionPane.showMessageDialog(null, "Der Arbeiter war zu diesem Zeitpunkt noch nicht eingestellt :DD");
+                return;
+        }
+        
+        
+        for (int k = 0; k < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
+            
+            if(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(k) == Arbeiter.arbeiterListe.get(table1.getSelectedRow())){
+               JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter, ist bereits in diesem Bauauftrag.");
+               return;
+            }
+            
+            if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
+                JOptionPane.showMessageDialog(null, "Der Arbeiter ist zu diesem Zeitpunkt beschäftigt");
+                beschäftigt = true;
+                return;
+            }
+        
+        }
+        if(beschäftigt == false){
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
 
-        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
-        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
+        Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
+        Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
 
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
-        Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
+        Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
-        System.out.println(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum()));
-
+        Arbeiter.arbeiterListeAusgeben();
+        }
     }
-
+    //----------------------------------------
+    
+    
     public void arbeiterWirdArbeitslos(JTable table1, JTable table2, Arbeiter a1) {
         if (Bauauftrag.bauAuftragListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
@@ -710,15 +741,15 @@ public class FirmaGUI extends JFrame {
 
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().remove(a1);
 
-        for (int i = 0; i < Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); i++) {
-            if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(i).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
-                Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(i);
-                Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(i);
+        for (int i = 0; i < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); i++) {
+            if (Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(i).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
+                Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().remove(i);
+                Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().remove(i);
             }
         }
 
-        if (Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().isEmpty()) {
-            Arbeiter.mitArbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
+        if (Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().isEmpty()) {
+            Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(false);
             table1.setValueAt('✖', table1.getSelectedRow(), 5);
         }
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");

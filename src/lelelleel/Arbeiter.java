@@ -17,7 +17,7 @@ public class Arbeiter {
     //Attribute
     //-----------------------------------------
     private String name;
-    private int mitarbeiterId;                  //Die zusätzliche Variable "MitarbeiterID" wurde eingeführt, um jeden Mitarbeiter einzigartig zu machen
+    private int arbeiterID;                  //Die zusätzliche Variable "MitarbeiterID" wurde eingeführt, um jeden Mitarbeiter einzigartig zu machen
     private String berufsBezeichnung;
     private LocalDate einstellungsDatum;
     private double jahresGehalt;
@@ -26,7 +26,7 @@ public class Arbeiter {
     private LinkedList <LocalDate> auftragsEnde;
     
     static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-    static LinkedList<Arbeiter> mitArbeiterListe = new LinkedList<Arbeiter>();
+    static LinkedList<Arbeiter> arbeiterListe = new LinkedList<Arbeiter>();
     //-----------------------------------------
 
     
@@ -35,7 +35,7 @@ public class Arbeiter {
     public static Arbeiter arbeiterErstellen(String name,int mitarbID,String berufsBez,double jahresGehalt,LocalDate einstelDat) {
        
             Arbeiter a1 = new Arbeiter(name, mitarbID, berufsBez, jahresGehalt, einstelDat);
-            mitArbeiterListe.add(a1);
+            arbeiterListe.add(a1);
         return a1;
 
     }       
@@ -45,18 +45,18 @@ public class Arbeiter {
     //-----------------------------------------
     //Um alle Mitarbeiter auszugeben
     public static void arbeiterListeAusgeben() {
-        if (mitArbeiterListe.isEmpty()) {
+        if (arbeiterListe.isEmpty()) {
             System.out.println("Die Liste ist leer");
         }
         
-        for (int j = 0; j < mitArbeiterListe.size(); j++) {
+        for (int j = 0; j < arbeiterListe.size(); j++) {
             
             System.out.println("Stelle im Array: "+j);
-            System.out.println("MitarbeiterID: " + mitArbeiterListe.get(j).getMitarbeiterId());
-            System.out.println("Name: " + mitArbeiterListe.get(j).getName());
-            System.out.println("Berufsvezeichnung: " + mitArbeiterListe.get(j).getBerufsBezeichnung());
-            System.out.println("Einstellungsdatum: " + mitArbeiterListe.get(j).getEinstellungsDatum());
-            System.out.println("Jahresgehalt: " + mitArbeiterListe.get(j).getJahresGehalt());
+            System.out.println("MitarbeiterID: " + arbeiterListe.get(j).getArbeiterID());
+            System.out.println("Name: " + arbeiterListe.get(j).getName());
+            System.out.println("Berufsvezeichnung: " + arbeiterListe.get(j).getBerufsBezeichnung());
+            System.out.println("Einstellungsdatum: " + arbeiterListe.get(j).getEinstellungsDatum());
+            System.out.println("Jahresgehalt: " + arbeiterListe.get(j).getJahresGehalt());
             System.out.println("--------------------------");
         }
     }
@@ -79,7 +79,7 @@ public class Arbeiter {
     //Konstruktor
     public Arbeiter(String name, int mitarbeiterId, String berufsBezeichnung, double jahresGehalt,LocalDate einstellungsDatum) {
         this.name = name;
-        this.mitarbeiterId = mitarbeiterId;
+        this.arbeiterID = mitarbeiterId;
         this.berufsBezeichnung = berufsBezeichnung;
         this.einstellungsDatum = einstellungsDatum;
         this.jahresGehalt = jahresGehalt;
@@ -91,11 +91,11 @@ public class Arbeiter {
 
     //getter & setter
     //-----------------------------------------
-    public int getMitarbeiterId() {
-        return mitarbeiterId;
+    public int getArbeiterID() {
+        return arbeiterID;
     }
-    public void setMitarbeiterId(int mitarbeiterId) {
-        this.mitarbeiterId = mitarbeiterId;
+    public void setArbeiterID(int mitarbeiterId) {
+        this.arbeiterID = mitarbeiterId;
     }
     public void setName(String name) {
         this.name = name;
@@ -137,11 +137,11 @@ public class Arbeiter {
     }
 
     public static LinkedList<Arbeiter> getMitArbeiterListe(){
-        return mitArbeiterListe;
+        return arbeiterListe;
     }
 
     public static void listeZuArray(){
-        mitArbeiterListe.toArray();
+        arbeiterListe.toArray();
     }
     
     public LinkedList<LocalDate> getAuftragsBegin(){

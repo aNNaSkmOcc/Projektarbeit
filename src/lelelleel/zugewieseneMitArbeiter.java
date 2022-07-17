@@ -84,7 +84,7 @@ public class zugewieseneMitArbeiter extends JFrame {
         Object[] row = new Object[5];
 
         for (int i = 0; i < Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().size(); i++) {
-            row[0] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getMitarbeiterId();
+            row[0] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getArbeiterID();
             row[1] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getName();
             row[2] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getBerufsBezeichnung();
             row[3] = Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getJahresGehalt();

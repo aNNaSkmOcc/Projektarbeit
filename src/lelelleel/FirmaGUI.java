@@ -722,18 +722,23 @@ public class FirmaGUI extends JFrame {
             }
         }
         /*
-        Falls aber jetzt der die if-Abfrage davor(Z.718) negativ ausfallen sollte, dann wird aber jetzt die folgende if-Abfrage positiv
+        Falls aber jetzt der die if-Abfrage davor negativ ausfallen sollte, dann wird aber jetzt die folgende if-Abfrage positiv
         ausfallen.
 
         Zunächst mal, sollte erklärt werden, wie überhaupt die Mitarbeiter in die Bauaufträge gespeichert werden.
-        Jedes Bauauftragobjekt, besitzt eine Liste mit den Bauaufträgen drin.
+        Jedes Bauauftragobjekt, besitzt eine Liste von typ "Arbeiter" mit den Bauaufträgen drin.
         */
         if(beschäftigt == false){
+        /*
+        Als erstes wird nach der Abfrage, der ein Objekt in die Liste eingefügt.
+         */
         Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().add(a1);
 
+        //Danach erhalten die Mitarbeiter dann das Start und das Encdatum des Auftrags, zu dem sie Eingeteilt werden.
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum());
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().add(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum());
 
+        //Nun folgen ein paar optische dinger, wie z.B dass eine Bestätigung erscheint, oder
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);

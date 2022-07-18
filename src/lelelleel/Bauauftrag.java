@@ -71,32 +71,13 @@ public class Bauauftrag{
 
 
     //Um aufträge zu entfernen
-    public static void bauauftragEntfernen() {
-        if (bauAuftragListe.isEmpty()) {
-            System.out.println("--------------------------");
-            System.out.println("Die Liste ist leerD");
-            System.out.println("--------------------------");
-        } else {
 
-
-            System.out.println("Welchen Bauauftrag möchten sie entfernen? (ID eingeben)");
-            for (int j = 0; j < bauAuftragListe.size(); j++) {
-                System.out.println("BauauftragsID: " + bauAuftragListe.get(j).getBauauftragsID());
-                System.out.println("Adresse: " + bauAuftragListe.get(j).getadresse());
-                System.out.println("Ort: " + bauAuftragListe.get(j).getOrt());
-            }
-            int delete = scanner.nextInt();
-            for (int k = 0; k < bauAuftragListe.size(); k++) {
-                if (bauAuftragListe.get(k).getBauauftragsID() == delete) {
-                    bauAuftragListe.remove(k);
-                }
-            }
-        }
-    }
 
     /*
     Diese Methode findet man sowohl bei der Klasse Arbeiter, als auch bei der Klasse Bauauftrag. Sie ist essenziell,
-    weil sie Bauauftröge
+    weil sie Daten für die Bauaufträge und Arbeiter von einem String, in den Datentyp "DateTime" konvertiert. Leider musste man hier
+    das ganze über eine Methode machen, weil man bei einem JOptionPane nicht automatisch einen String in ein DateTime konvertieren,
+    so wie es bsp. bei einem Integer, Double etc der fall war.
      */
     public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
        

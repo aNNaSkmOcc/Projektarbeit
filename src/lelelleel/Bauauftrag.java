@@ -91,8 +91,7 @@ public class Bauauftrag{
    
     //Konstruktor
     //----------------------
-    public Bauauftrag(int bauauftragsID, String auftragGeber, String adresse, String ort ,String beschreibung, LocalDate startDatum, LocalDate endDatum) {
-        super();
+    public Bauauftrag(int bauauftragsID, String auftragGeber, String adresse, String ort ,String beschreibung, LocalDate startDatum, LocalDate endDatum){
         this.bauAuftragMitArbeiter = new LinkedList<Arbeiter>();
         this.auftragGeber = auftragGeber;
         this.ort = ort;

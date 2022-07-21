@@ -30,16 +30,31 @@ public class FirmaGUI extends JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    /*
+    Hier
+     */
     private void initComponents() {
 
         mainFrame = new javax.swing.JPanel();
         mitarbeiterHinzufügenButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableArbeiter = new javax.swing.JTable();
+        /*
+        die Attribute "tableArbeiter" und die Methode "tableArbeiter" sind ja Tabellen. Standartgemäß ist es eingeschaltet,
+        dass man die Tabelle bearbeiten können. Nun, verändert man aber direkt danach die Methode, indem man direkt sagt, dass die bearbeitung
+        der Zellen nicht eingeschaltet ist, indem man ein "false" zurückgibt.
+         */
+        tableArbeiter = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        };
         mitarbeiterEntfernenButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableBauaufträge = new javax.swing.JTable();
+        tableBauaufträge = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        };
         arbeiterÄndernButton = new javax.swing.JButton();
         arbeiterZuBauauftrag = new javax.swing.JButton();
         arbeiterVonBauauftragLöschenButton = new javax.swing.JButton();
@@ -60,6 +75,11 @@ public class FirmaGUI extends JFrame {
                 mitarbeiterHinzufügenButtonActionPerformed(evt);
             }
         });
+
+        tableArbeiter.getTableHeader().setReorderingAllowed(false);
+        tableBauaufträge.getTableHeader().setReorderingAllowed(false);
+
+
 
         tableArbeiter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,11 +231,11 @@ public class FirmaGUI extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
     
     //Knopf zur erstellung eines Mitarbeiters
     //-----------------------------------------
-    private void mitarbeiterHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterHinzufügenButtonActionPerformed
+    private void mitarbeiterHinzufügenButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String name = JOptionPane.showInputDialog(null, "Name? (Vorname - Nachname)");
         
         //Hier ein try-catch, damit dass wenn ein String eingegeben wird, das Programm nicht abschmiert
@@ -250,43 +270,44 @@ public class FirmaGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
             }
         }
-    }//GEN-LAST:event_mitarbeiterHinzufügenButtonActionPerformed
+    }
     //-----------------------------------------
-    
     
     //Knopf zum entfernen des Arbeiters
     //-----------------------------------------
-    private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt){
+    private void mitarbeiterEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {                               
         //Hier wird geschaut, ob es überhaupt Mitarbeiter gibt, denn wir können Mitarbeiter nicht entfernen die nicht existieren.
         //Wenn Mitarbeiter existieren, führe die Methode "ArbeiterVonTabelleEntfernen()" aus.
         if (Arbeiter.arbeiterListe.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
             return;
         }
-        ArbeiterVonTabelleEntfernen(tableArbeiter);
+        ArbeiterVonTabelleEntfernen(getTableArbeiter());
         JOptionPane.showMessageDialog(null, "Der Arbeiter wurde erfolgreich entfernt");
-    }
+    }                             
     //-----------------------------------------
-    
-    
+
+
     //Knopf zum Abändern eines Arbeiters
     //-----------------------------------------
-    private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        //Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
+    private void arbeiterÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        /*
+        Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
+         */
         try{
             //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
             if (Arbeiter.arbeiterListe.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
                 return;
             }
-            arbeiterTabelleAbÄndern(tableArbeiter);
+            arbeiterTabelleAbÄndern(getTableArbeiter());
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten");
                 return;
             }
         
 
-    }//GEN-LAST:event_arbeiterÄndernButtonActionPerformed
+    }                                                    
     //-----------------------------------------
     
     //Knopf, um einen Arbeiter, zu einem Bauauftrag hinzuzufügen
@@ -301,15 +322,14 @@ public class FirmaGUI extends JFrame {
         }
         //Hier werden verschiedenste if-Abfragen gemacht, um die verschiedensten Fälle abzudecken.
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterKriegtJob(tableArbeiter, tableBauaufträge, Arbeiter.arbeiterListe.get(tableArbeiter.getSelectedRow()));
+            arbeiterKriegtJob(getTableArbeiter(), getTableBauaufträge(), Arbeiter.arbeiterListe.get(getTableArbeiter().getSelectedRow()));
         }
         
 
 
-    }//GEN-LAST:event_arbeiterZuBauauftragActionPerformed
+    }                                                    
     //-----------------------------------------
-    
-    
+
     //Knopf um einen Arbeiter, von einem Bauauftrag zu entfernen
     //-----------------------------------------
     private void arbeiterVonBauauftragLöschenButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,7 +339,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
         }
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterWirdArbeitslos(tableArbeiter, tableBauaufträge, Arbeiter.arbeiterListe.get(tableArbeiter.getSelectedRow()));
+            arbeiterWirdArbeitslos(getTableArbeiter(), getTableBauaufträge(), Arbeiter.arbeiterListe.get(getTableArbeiter().getSelectedRow()));
         }
     }//
     //-----------------------------------------
@@ -361,43 +381,43 @@ public class FirmaGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
             }
         }
-    }//GEN-LAST:event_bauAufträgeHinzufügenButtonActionPerformed
+    }                                                           
     //-----------------------------------------
     
     
     //Knopf um einen Bauauftrag zu entfernen
     //-----------------------------------------
-    private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragEntfernenButtonActionPerformed
+    private void bauAuftragEntfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(Bauauftrag.bauAuftragListe.isEmpty()){
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge");
             return;
         }
-        bauauftragVonTabelleEntfernen(tableArbeiter, tableBauaufträge);
+        bauauftragVonTabelleEntfernen(getTableArbeiter(), getTableBauaufträge());
         JOptionPane.showMessageDialog(null, "Bauauftrag erfolgreich entfernt.");
-    }//GEN-LAST:event_bauAuftragEntfernenButtonActionPerformed
+    }
     //-----------------------------------------
     
     //Knopf um einen Bauauftrag zu verändern
     //-----------------------------------------
-    private void bauAuftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bauAuftragÄndernButtonActionPerformed
+    private void bauAuftragÄndernButtonActionPerformed(java.awt.event.ActionEvent evt) {
         /*
         Hier muss ein try-catch ausgeführt werden, falls man eines der Daten vom Typ "DateTime" verändert werden möchte
         und diesen dann aber falsch eingibt.
         */
         try {
-            bauAuftragTabelleAbändern(tableBauaufträge);
+            bauAuftragTabelleAbändern(getTableBauaufträge());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ein Fehler ist aufgetreten");
             return;
         }
-    }//GEN-LAST:event_bauAuftragÄndernButtonActionPerformed
+    }
     //-----------------------------------------
     
     private void zugewieseneArbeiterAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {
         /*
         Hier wird die GUI "zugewieseneMitArbeiter aufgerufen.
         */
-        new zugewieseneMitArbeiter(tableBauaufträge).setVisible(true);
+        new zugewieseneMitArbeiter(getTableBauaufträge()).setVisible(true);
     }
 
 
@@ -416,7 +436,7 @@ public class FirmaGUI extends JFrame {
         private javax.swing.JTable tableArbeiter;
         private javax.swing.JTable tableBauaufträge;
         private javax.swing.JButton zugewieseneArbeiterAnzeigen;
-        // End of variables declaration//GEN-END:variables
+        // End of variables declaration                   
 
     /*
     Das Programm wurde eigenständig erstellt von:
@@ -462,7 +482,7 @@ public class FirmaGUI extends JFrame {
         Tabelle, nicht per se ein Objekt erstellt.
         */
         Object[] row = new Object[6];
-        DefaultTableModel model = (DefaultTableModel) tableArbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) getTableArbeiter().getModel();
         
         //Hier wird jeder Mitarbeiter, in eine "schublade" des Arrays gestellt.
         for (int i = 0; i < Arbeiter.arbeiterListe.size(); i++) {
@@ -497,7 +517,7 @@ public class FirmaGUI extends JFrame {
         Auch hier wurde das DefaultTableModel benutzt, um Zeilen zu entfernen oder hinzuzufügen. Auch hier können wir das
         Standartmodel vom JTable, als den DefaultTableModel Typecasten.
         */
-        DefaultTableModel model = (DefaultTableModel) this.tableArbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.getTableArbeiter().getModel();
         /*
         mit der if-Abfrage, gucken wir ob die Zeile überhautpt elemente enthält. Wenn ein Element Leer ist, hat es im Jtable immer
         den Wert -1. Wenn die Zeile nicht leer ist also nicht den Wert -1 hat, kann das System bedenkenlos die Folgenden Methoden
@@ -518,7 +538,7 @@ public class FirmaGUI extends JFrame {
         "throws" dass es sein kann, dass das System ein Exception (plötzlich unerwarteter Fehler) rauswirft und abgefangen werden möchte.
         */
         //Hier nutzen wir wieder das DefaultTableModel, aufgrund seiner bereits genannten Vorteile.
-        DefaultTableModel model = (DefaultTableModel) this.tableArbeiter.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.getTableArbeiter().getModel();
         //Die if-Abfrage überprüft, ob die Zelle leer ist, die wie verändern möchten. 
         if (table.getSelectedRow() != -1) {
             /*
@@ -575,7 +595,7 @@ public class FirmaGUI extends JFrame {
         auch mehr Attribute haben als bei der Klasse Arbeiter. Auch hier benutzen wir das DefaultTableModel, damit wir 
         Zeilen bearbeiten und abfragen können.
         */
-        DefaultTableModel model = (DefaultTableModel) tableBauaufträge.getModel();
+        DefaultTableModel model = (DefaultTableModel) getTableBauaufträge().getModel();
         Object[] row = new Object[7];
 
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
@@ -600,7 +620,7 @@ public class FirmaGUI extends JFrame {
     //----------------------------------------
     public void bauauftragVonTabelleEntfernen(JTable table1, JTable table2) {
         //Hier benutzen wir für die methode addRow das DefaultTableModel.
-        DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.getTableBauaufträge().getModel();
         //Mit der if-Abfrage überprüfen wir, ob die Reihe leer ist, denn man kann ja nicht nichts entfernen
         if (table2.getSelectedRow() != -1) {
             /*
@@ -644,7 +664,7 @@ public class FirmaGUI extends JFrame {
         /*
         Hier Funktioniert das Prinzip analog zu der Methode "ArbeiterTabelleAbändern()". 
         */
-        DefaultTableModel model = (DefaultTableModel) this.tableBauaufträge.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.getTableBauaufträge().getModel();
         if (table.getSelectedRow() != -1) {
             /*
             Auch hier klappern wir viele Fälle ab um zu überprüfen, welches Attribut wir jetzt verändern müssen.
@@ -810,6 +830,127 @@ public class FirmaGUI extends JFrame {
             table1.setValueAt('✖', table1.getSelectedRow(), 5);
         }
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich entfernt");
+    }
+
+
+    public javax.swing.JButton getArbeiterVonBauauftragLöschenButton() {
+        return arbeiterVonBauauftragLöschenButton;
+    }
+
+    public void setArbeiterVonBauauftragLöschenButton(javax.swing.JButton arbeiterVonBauauftragLöschenButton) {
+        this.arbeiterVonBauauftragLöschenButton = arbeiterVonBauauftragLöschenButton;
+    }
+
+    public javax.swing.JButton getArbeiterZuBauauftrag() {
+        return arbeiterZuBauauftrag;
+    }
+
+    public void setArbeiterZuBauauftrag(javax.swing.JButton arbeiterZuBauauftrag) {
+        this.arbeiterZuBauauftrag = arbeiterZuBauauftrag;
+    }
+
+    public javax.swing.JButton getArbeiterÄndernButton() {
+        return arbeiterÄndernButton;
+    }
+
+
+    public void setArbeiterÄndernButton(javax.swing.JButton arbeiterÄndernButton) {
+        this.arbeiterÄndernButton = arbeiterÄndernButton;
+    }
+
+    public javax.swing.JButton getBauAuftragEntfernenButton() {
+        return bauAuftragEntfernenButton;
+    }
+
+    public void setBauAuftragEntfernenButton(javax.swing.JButton bauAuftragEntfernenButton) {
+        this.bauAuftragEntfernenButton = bauAuftragEntfernenButton;
+    }
+
+    public javax.swing.JButton getBauAuftragÄndernButton() {
+        return bauAuftragÄndernButton;
+    }
+
+    public void setBauAuftragÄndernButton(javax.swing.JButton bauAuftragÄndernButton) {
+        this.bauAuftragÄndernButton = bauAuftragÄndernButton;
+    }
+
+
+    public javax.swing.JButton getBauAufträgeHinzufügenButton() {
+        return bauAufträgeHinzufügenButton;
+    }
+
+    public void setBauAufträgeHinzufügenButton(javax.swing.JButton bauAufträgeHinzufügenButton) {
+        this.bauAufträgeHinzufügenButton = bauAufträgeHinzufügenButton;
+    }
+
+    public javax.swing.JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+
+    public void setjScrollPane1(javax.swing.JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public javax.swing.JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(javax.swing.JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public javax.swing.JPanel getMainFrame() {
+        return mainFrame;
+    }
+
+
+    public void setMainFrame(javax.swing.JPanel mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+
+    public javax.swing.JButton getMitarbeiterEntfernenButton() {
+        return mitarbeiterEntfernenButton;
+    }
+
+
+    public void setMitarbeiterEntfernenButton(javax.swing.JButton mitarbeiterEntfernenButton) {
+        this.mitarbeiterEntfernenButton = mitarbeiterEntfernenButton;
+    }
+
+
+    public javax.swing.JButton getMitarbeiterHinzufügenButton() {
+        return mitarbeiterHinzufügenButton;
+    }
+
+    public void setMitarbeiterHinzufügenButton(javax.swing.JButton mitarbeiterHinzufügenButton) {
+        this.mitarbeiterHinzufügenButton = mitarbeiterHinzufügenButton;
+    }
+
+
+    public javax.swing.JTable getTableArbeiter() {
+        return tableArbeiter;
+    }
+
+    public void setTableArbeiter(javax.swing.JTable tableArbeiter) {
+        this.tableArbeiter = tableArbeiter;
+    }
+
+    public javax.swing.JTable getTableBauaufträge() {
+        return tableBauaufträge;
+    }
+
+    public void setTableBauaufträge(javax.swing.JTable tableBauaufträge) {
+        this.tableBauaufträge = tableBauaufträge;
+    }
+
+    public javax.swing.JButton getZugewieseneArbeiterAnzeigen() {
+        return zugewieseneArbeiterAnzeigen;
+    }
+
+    public void setZugewieseneArbeiterAnzeigen(javax.swing.JButton zugewieseneArbeiterAnzeigen) {
+        this.zugewieseneArbeiterAnzeigen = zugewieseneArbeiterAnzeigen;
     }
 
 }

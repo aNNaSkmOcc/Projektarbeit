@@ -31,7 +31,8 @@ public class FirmaGUI extends JFrame {
 
     @SuppressWarnings("unchecked")
     /*
-    Diese Methode, wurde automatisch vom Compiler generiert, der die Eigenschaften der GUI deklariert.
+    Die Methode "initComponents()", wurde automatisch vom Compiler "NetBeans" generiert, der die Eigenschaften der GUI deklariert. Und diese
+    dann nach wunsch Initialisiert.
      */
     private void initComponents() {
 

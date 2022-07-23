@@ -12,9 +12,9 @@ import javax.swing.SpringLayout;
 
 public class Bauauftrag{
 
-
+    //***********************************************
     //Attribute
-    //----------------------
+    //***********************************************
     private String auftragGeber;
     private String ort;
     private String adresse;
@@ -24,15 +24,14 @@ public class Bauauftrag{
     private int bauauftragsID;
     
 
-    static Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     static LinkedList<Bauauftrag> bauAuftragListe = new LinkedList<Bauauftrag>();
     //Hier in dieser Liste, werden die zugewiesenen Arbeiter gespeichert.
     LinkedList<Arbeiter> bauAuftragMitArbeiter;
 
 
-    //----------------------
-
+    //***********************************************
     //Methoden
+    //***********************************************
 
     public static Bauauftrag bauauftragErstellen(String auftragGeber, String ort, int bauauftragsID, String adresse, String beschreibung, LocalDate startDatum, LocalDate endDatum) {
         
@@ -42,7 +41,10 @@ public class Bauauftrag{
         return b1;
     }
 
-    //Methode um alle Bauaufträge in der Systemausgabe auszugeben
+    /*
+    Methode um alle Bauaufträge in der Systemausgabe auszugeben. Um das Zusammenspiel ziwschen der Tabelle und den Objekten zu überprüfen,
+    haben wir diese Methode in dieser
+     */
     public static void AuftragListeAusgeben() {
         if (bauAuftragListe.isEmpty()) {
             System.out.println("Die Liste ist leer");
@@ -69,28 +71,8 @@ public class Bauauftrag{
         }
     }
 
-
-    //Um aufträge zu entfernen
-
-
-    /*
-    Diese Methode findet man sowohl bei der Klasse Arbeiter, als auch bei der Klasse Bauauftrag. Sie ist essenziell,
-    weil sie Daten für die Bauaufträge und Arbeiter von einem String, in den Datentyp "DateTime" konvertiert. Leider musste man hier
-    das ganze über eine Methode machen, weil man bei einem JOptionPane nicht automatisch einen String in ein DateTime konvertieren,
-    so wie es bsp. bei einem Integer, Double etc der fall war.
-     */
-    public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
-       
-       LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-       
-       return datee;
-    }
-    
-    
-
-   
+    //***********************************************
     //Konstruktor
-    //----------------------
     public Bauauftrag(int bauauftragsID, String auftragGeber, String adresse, String ort ,String beschreibung, LocalDate startDatum, LocalDate endDatum){
         this.bauAuftragMitArbeiter = new LinkedList<Arbeiter>();
         this.auftragGeber = auftragGeber;
@@ -101,10 +83,23 @@ public class Bauauftrag{
         this.startDatum = startDatum;
         this.endDatum = endDatum;
     }
-    //----------------------
+    //***********************************************
 
+    /*
+    Diese Methode findet man sowohl bei der Klasse Arbeiter, als auch bei der Klasse Bauauftrag. Sie ist essenziell,
+    weil sie Einfabe für für die Bauaufträge und Arbeiter von einem String, in den Datentyp "DateTime" konvertiert. Leider musste man hier
+    das ganze über eine Methode machen, weil man bei einem JOptionPane nicht automatisch einen String in ein DateTime konvertieren,
+    so wie es bsp. bei einem Integer, Double etc der fall war.
+     */
+    public static LocalDate stringZuDatumKonvertieren(String datum) throws ParseException{
+       
+       LocalDate datee = LocalDate.parse(datum,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+       
+       return datee;
+    }
+
+    //***********************************************
     //getter und setter
-    //----------------------
     public String getAuftragGeber() {
         return auftragGeber;
     }

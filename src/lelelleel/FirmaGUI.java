@@ -261,13 +261,13 @@ public class FirmaGUI extends JFrame {
             }
         }
         //Wenn der Mitarbeiter nicht vorhanden ist, dann erstell einen Arbeiter und füge ihn zur Tabelle hinzu.
-        //Der try-catch sorgt dafür, dass die Eingabe des Datum vom Typ "DateTime" abgefangen werden kann :D
+        //Der try-catch sorgt dafür, dass die Eingabe des Datum vom Typ "DateTime" abgefangen werden kann
         if (istVorhanden == false) {
             try {
                 Arbeiter.arbeiterErstellen(name, mitarbID, berufsBez, jahresGehalt, Arbeiter.stringZuDatumKonvertieren(einstelDat));
                 ArbeiterZurTabelleHinzufügen();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen :DD");
+                JOptionPane.showMessageDialog(null, "uupsi da ist wohl was schief gegangen ");
             }
         }
     }
@@ -295,7 +295,7 @@ public class FirmaGUI extends JFrame {
         Auch hier machen wir einen try-catch, falls wir das Einstellugnsdatum des Mitarbeiters ändern möchten, die Eingabe falsch machen
          */
         try{
-            //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus :D
+            //Zusätzlich wird bei der if-Abfrage geschaut, ob überhaupt ein Mitarbeiter existiert, wenn nicht, dann führe die Methode "ArbeiterTabelleAbÄndern()" aus
             if (Arbeiter.arbeiterListe.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Wir haben keine Mitarbeiter");
                 return;
@@ -356,7 +356,7 @@ public class FirmaGUI extends JFrame {
         try {
             bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Hier soll bitte ein Integer rein :D");
+            JOptionPane.showMessageDialog(null, "Hier soll bitte ein Integer rein ");
             return;
         }
         String auftragGeber = JOptionPane.showInputDialog(null, "Aufftraggeber?");
@@ -382,7 +382,7 @@ public class FirmaGUI extends JFrame {
                 Bauauftrag.bauauftragErstellen(auftragGeber, ort, bauauftragID, adresse, beschreibungg, Bauauftrag.stringZuDatumKonvertieren(eingabeStartDatum), Bauauftrag.stringZuDatumKonvertieren(eingabeEndDatumm));
                 bauauftragZurTabelleHinzufügen();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Oh nein das mit dem Datum hat wohl nicht ganz so geklappt :DD");
+                JOptionPane.showMessageDialog(null, "Oh nein das mit dem Datum hat wohl nicht ganz so geklappt ");
             }
         }
     }                                                           
@@ -425,7 +425,7 @@ public class FirmaGUI extends JFrame {
     }
 
 
-    // Variablen :D
+    // Variablen
         private javax.swing.JButton arbeiterVonBauauftragLöschenButton;
         private javax.swing.JButton arbeiterZuBauauftrag;
         private javax.swing.JButton arbeiterÄndernButton;
@@ -677,7 +677,7 @@ public class FirmaGUI extends JFrame {
                 int aenderungZahl = Integer.parseInt(JOptionPane.showInputDialog(null, "Geben Sie die neue ID ein"));
                 for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
                     if (Bauauftrag.bauAuftragListe.get(i).getBauauftragsID() == aenderungZahl) {
-                        JOptionPane.showMessageDialog(null, "Dieser Bauauftrag exisitert schon :D");
+                        JOptionPane.showMessageDialog(null, "Dieser Bauauftrag exisitert schon ");
                         return;
                     }
                 }
@@ -758,7 +758,7 @@ public class FirmaGUI extends JFrame {
         kommt und der Arbeiter dann selbstverständlich nicht eingetragen wird.
         */
         if (Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum().isBefore(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getEinstellungsDatum())) {
-                JOptionPane.showMessageDialog(null, "Der Arbeiter war zu diesem Zeitpunkt noch nicht eingestellt :DD");
+                JOptionPane.showMessageDialog(null, "Der Arbeiter war zu diesem Zeitpunkt noch nicht eingestellt ");
                 return;
         }
         

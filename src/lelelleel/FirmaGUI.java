@@ -31,7 +31,7 @@ public class FirmaGUI extends JFrame {
 
     @SuppressWarnings("unchecked")
     /*
-    Hier
+    Diese Methode, wurde automatisch vom Compiler generiert, der die Eigenschaften der GUI deklariert.
      */
     private void initComponents() {
 
@@ -63,7 +63,7 @@ public class FirmaGUI extends JFrame {
         zugewieseneArbeiterAnzeigen = new javax.swing.JButton();
         bauAuftragEntfernenButton = new javax.swing.JButton();
 
-        setTitle("A&C - GmbH & Co.KG");
+        setTitle("ACT - GmbH & Co.KG");
         setLocation(new java.awt.Point(0, 0));
         setName("mainFrame"); // NOI18N
 
@@ -322,7 +322,11 @@ public class FirmaGUI extends JFrame {
         }
         //Hier werden verschiedenste if-Abfragen gemacht, um die verschiedensten Fälle abzudecken.
         if (!Bauauftrag.bauAuftragListe.isEmpty()) {
-            arbeiterKriegtJob(getTableArbeiter(), getTableBauaufträge(), Arbeiter.arbeiterListe.get(getTableArbeiter().getSelectedRow()));
+            try {
+                arbeiterKriegtJob(getTableArbeiter(), getTableBauaufträge(), Arbeiter.arbeiterListe.get(getTableArbeiter().getSelectedRow()));
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Sie müssen einen Arbeiter UND einen Bauauftrag auswählen");
+            }
         }
         
 
@@ -352,7 +356,7 @@ public class FirmaGUI extends JFrame {
         try {
             bauauftragID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID?"));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Hier muss ein Integer hin diggi");
+            JOptionPane.showMessageDialog(null, "Hier soll bitte ein Integer rein :D");
             return;
         }
         String auftragGeber = JOptionPane.showInputDialog(null, "Aufftraggeber?");
@@ -367,7 +371,7 @@ public class FirmaGUI extends JFrame {
         //Hier wird überprüft, ob die eingegebene ID bereits existiert. Denn wenn doch, dann erhält sie den Status "ist Vorhanden"
         for (int i = 0; i < Bauauftrag.bauAuftragListe.size(); i++) {
             if (Bauauftrag.bauAuftragListe.get(i).getBauauftragsID() == bauauftragID) {
-                JOptionPane.showMessageDialog(null, "Dieser BauauftragsID existiert bereits :DD");
+                JOptionPane.showMessageDialog(null, "Dieser BauauftragsID existiert bereits ");
                 istVorhanden = true;
             }
         }
@@ -702,13 +706,35 @@ public class FirmaGUI extends JFrame {
             } else if (model.getColumnName(table.getSelectedColumn()) == "Anfangsdatum") {
                 String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Anfangsdatum ein!!");
                 model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
-                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setEndDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
+
+
+                for(int i = 0;i < Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().size();i++) {
+                    for (int j = 0; j < Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsBegin().size(); j++) {
+                        if (Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsBegin().get(j).equals(Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getStartDatum())) {
+                            Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsBegin().set(j, Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
+
+                        }
+                    }
+                }
+                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setStartDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
 
             } else if (model.getColumnName(table.getSelectedColumn()) == "Enddatum") {
                 String aenderungWort = JOptionPane.showInputDialog(null, "Geben Sie das neue Enddatum ein!!");
                 model.setValueAt(Bauauftrag.stringZuDatumKonvertieren(aenderungWort), table.getSelectedRow(), table.getSelectedColumn());
-                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setStartDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
+
+                for(int i = 0;i < Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().size();i++) {
+                    for (int j = 0; j < Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsEnde().size(); j++) {
+                        if (Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsEnde().get(j).equals(Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getEndDatum())) {
+                            Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).getBauAuftragMitArbeiter().get(i).getAuftragsEnde().set(j, Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
+
+                        }
+                    }
+                }
+                Bauauftrag.bauAuftragListe.get(table.getSelectedRow()).setEndDatum(Bauauftrag.stringZuDatumKonvertieren(aenderungWort));
             }
+
+            Arbeiter.arbeiterListeAusgeben();
+
         }
     }
     //----------------------------------------
@@ -726,17 +752,7 @@ public class FirmaGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Wir haben keine Bauaufträge und keine Arbeiter");
             return;
         }
-        //checkt erstmal, ob ein Mitarbeiter ausgewählt wurde
-        if (!table1.isRowSelected(table1.getSelectedRow())) {
-            JOptionPane.showMessageDialog(null, "Sie müssen noch einen Arbeiter auswählen");
-            return;
-        }
-        //checkt erstmal, ob ein Bauauftrag ausgewählt wurde
-        if (!table2.isRowSelected(table2.getSelectedRow())) {
-            JOptionPane.showMessageDialog(null, "Sie müssen noch ein Bauauftrag auswählen.");
-            return;
-        }
-        
+
         /*
         Diese if-Abfrage dient dazu, dass wenn ein Arbeiter zu einem Job eingetragen wird, wo es ihn nichtmal gab eine Fehlermeldung
         kommt und der Arbeiter dann selbstverständlich nicht eingetragen wird.
@@ -747,7 +763,17 @@ public class FirmaGUI extends JFrame {
         }
         
         /*
-        Diese for-schleife ist Essenziell für diese Methode. Sie blockt den Arbeiter für einen bestimmten Zeitraum, damit er 
+        Diese for-schleife überprüft, ob der Arbeiter bereits in dem Bauauftrag drinne ist oder nicht. Schließlich, kann der
+        Arbeiter sich nicht teilen.
+         */
+        for (int i = 0; i < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); i++) {
+            if (Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(i).equals(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum())) {
+                JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter, ist bereits in diesem Bauauftrag.");
+                return;
+            }
+        }
+        /*
+        Diese for-schleife bzw. die darin enthaltene if-Abfrage ist Essenziell für diese Methode. Sie blockt den Arbeiter für einen bestimmten Zeitraum, damit er
         in diesem Zeitraum nicht für andere Bauaufträge eingetragen werden kann.
         Außerdem wird nochmal geguckt, ob er nicht schon bereits in diesem Auftrag zugeteilt wurde.
         Wenn wir jetzt den Fall haben, dass der Arbeiter für einen bestimmten Auftrag geblockt ist,weil er zu diesem Zeitpunkt beschäfrigt ist,
@@ -755,11 +781,8 @@ public class FirmaGUI extends JFrame {
         */
         
         for (int k = 0; k < Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().size(); k++) {
-            if(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getBauAuftragMitArbeiter().get(k) == Arbeiter.arbeiterListe.get(table1.getSelectedRow())){
-               JOptionPane.showMessageDialog(null, "Dieser Mitarbeiter, ist bereits in diesem Bauauftrag.");
-               return;
-            }
-            if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) && Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
+
+            if(Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsBegin().get(k).isBefore(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getStartDatum()) || Arbeiter.arbeiterListe.get(table1.getSelectedRow()).getAuftragsEnde().get(k).isAfter(Bauauftrag.bauAuftragListe.get(table2.getSelectedRow()).getEndDatum())){
                 JOptionPane.showMessageDialog(null, "Der Arbeiter ist zu diesem Zeitpunkt beschäftigt");
                 beschäftigt = true;
                 return;
@@ -786,7 +809,7 @@ public class FirmaGUI extends JFrame {
         JOptionPane.showMessageDialog(null, "Arbeier erfolgreich hinzugefügt");
         Arbeiter.arbeiterListe.get(table1.getSelectedRow()).setHatAuftrag(true);
         table1.setValueAt('✓', table1.getSelectedRow(), 5);
-        Arbeiter.arbeiterListeAusgeben();
+
         }
     }
     //----------------------------------------

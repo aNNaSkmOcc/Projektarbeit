@@ -57,6 +57,8 @@ public class Arbeiter {
             System.out.println("Berufsvezeichnung: " + arbeiterListe.get(j).getBerufsBezeichnung());
             System.out.println("Einstellungsdatum: " + arbeiterListe.get(j).getEinstellungsDatum());
             System.out.println("Jahresgehalt: " + arbeiterListe.get(j).getJahresGehalt());
+            System.out.println("BeginDaten: "+arbeiterListe.get(j).getAuftragsBegin());
+            System.out.println("EndDaten: "+arbeiterListe.get(j).getAuftragsEnde());
             System.out.println("--------------------------");
         }
     }
